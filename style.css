@@ -1,0 +1,23 @@
+.dropdown-menu a{
+    color: black !important;
+}
+
+.prof-item{
+	text-align: center;
+}
+
+.col-md-4{
+	padding-top: 60px;
+	max-width: 400px;
+	min-height: 500px;
+}
+
+.list-group{
+	min-height: 300px;
+    max-height: 400px;
+	overflow-y: auto;
+}
+
+.main-col-head{
+	color: black;
+}

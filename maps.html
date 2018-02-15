@@ -14,7 +14,7 @@
     <!-- CSS Files -->
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
-    <link href="style.css" rel="stylesheet" />
+    <link href="mapstyle.css" rel="stylesheet" />
      <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
@@ -34,83 +34,50 @@
                Tunes
            </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-   	        <span class="navbar-toggler-bar bar1"></span>
-	        <span class="navbar-toggler-bar bar2"></span>
-	        <span class="navbar-toggler-bar bar3"></span>
- 	    </button>
+            <span class="navbar-toggler-bar bar1"></span>
+            <span class="navbar-toggler-bar bar2"></span>
+            <span class="navbar-toggler-bar bar3"></span>
+        </button>
 
 
         </div>
 
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
-    	    <ul class="navbar-nav">
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#pablo">People</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="maps.html">Map</a>
                 </li>
-				<li class="nav-item dropdown">
-					<a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">Profile</a>
-					<ul class="dropdown-menu">
-						<li class="prof-item"><a href="#">Login</a></li>
-						<li class="prof-item"><a href="#">Settings</a></li>
-						<li class="prof-item"><a href="#">Logout</a></li>
-					</ul>
-				</li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">Profile</a>
+                    <ul class="dropdown-menu">
+                        <li class="prof-item"><a href="#">Login</a></li>
+                        <li class="prof-item"><a href="#">Settings</a></li>
+                        <li class="prof-item"><a href="#">Logout</a></li>
+                    </ul>
+                </li>
             </ul>
 
         </div>
     </div>
 </nav>
     <!-- End Navbar -->
-
-	<div class="container text-center">
-		<div class="row justify-content-center">
-			<div class="col-md-4">
-				<h3><a class="main-col-head" href="#">People</a><h3>
-					<div class="list-group">
-						<a href="#" class="list-group-item">First item</a>
-						<a href="#" class="list-group-item">Second item</a>
-						<a href="#" class="list-group-item">Third item</a>
-						<a href="#" class="list-group-item">First item</a>
-						<a href="#" class="list-group-item">Second item</a>
-						<a href="#" class="list-group-item">Third item</a>
-						<a href="#" class="list-group-item">First item</a>
-						<a href="#" class="list-group-item">Second item</a>
-						<a href="#" class="list-group-item">Third item</a>
-					</div>
-			</div>
-			<div class="col-md-4">
-				<h3><a class="main-col-head" href="#">Events</a><h3>
-					<div class="list-group">
-						<a href="#" class="list-group-item">First item</a>
-						<a href="#" class="list-group-item">Second item</a>
-						<a href="#" class="list-group-item">Third item</a>
-						<a href="#" class="list-group-item">First item</a>
-						<a href="#" class="list-group-item">Second item</a>
-						<a href="#" class="list-group-item">Third item</a>
-						<a href="#" class="list-group-item">First item</a>
-						<a href="#" class="list-group-item">Second item</a>
-						<a href="#" class="list-group-item">Third item</a>
-					</div>
-			</div>
-			<div class="col-md-4">
-			<h3><a class="main-col-head" href="maps.html">Map</a><h3>
-			<div id="mapid" style="width: 350px; height: 400px;" class = "home-item"></div>
-			<script>
-			  		var mymap = L.map('mapid').setView([42.3832, -72.5199], 15);
-			  		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZXJtb29yZSIsImEiOiJjamRtZml3c3AwbGJ5MzNvMmpuMGYzaGZ2In0.DZxXS75gos2Oug3nGq1Wzg', {
-				    maxZoom: 18,
-				    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-				      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-				      'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-				    id: 'mapbox.streets'
-				  }).addTo(mymap);
-			</script>
-			</div>
-			</div>
-	</div>
+            <div class="col-md-12">
+            <div id="mapid" style="width: 100%; height: 580px;" class = "home-item"></div>
+            <script>
+                    var mymap = L.map('mapid').setView([42.3832, -72.5199], 15);
+                    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZXJtb29yZSIsImEiOiJjamRtZml3c3AwbGJ5MzNvMmpuMGYzaGZ2In0.DZxXS75gos2Oug3nGq1Wzg', {
+                    maxZoom: 18,
+                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                      'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                    id: 'mapbox.streets'
+                  }).addTo(mymap);
+            </script>
+            </div>
+    </div>
 
 
 

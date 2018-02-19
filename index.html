@@ -14,7 +14,7 @@
     <!-- CSS Files -->
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
-    <link href="style.css" rel="stylesheet" />
+    <link href="./assets/css/style.css" rel="stylesheet" />
      <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
@@ -65,10 +65,17 @@
 </nav>
     <!-- End Navbar -->
 
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-3">Welcome to Tunes</h1>
+    <p class="lead">Connect your Spotify account and find new friends near you today!</p>
+  </div>
+</div>
+
 	<div class="container text-center">
 		<div class="row justify-content-center">
 			<div class="col-md-4">
-				<h3><a class="main-col-head" href="#">People</a><h3>
+				<h3><a class="main-col-head" href="people.html">People</a><h3>
 					<div class="list-group">
 						<a href="Profile.html" class="list-group-item">
 						<img src="assets/images/tim-richards.jpg" class="rounded-circle" alt="Tim Richards">
@@ -109,33 +116,33 @@
 					</div>
 			</div>
 			<div class="col-md-4">
-				<h3><a class="main-col-head" href="#">Events</a><h3>
+				<h3><a class="main-col-head" href="event.html">Events</a><h3>
 					<div class="list-group">
-						<a href="#" class="list-group-item">
+						<a href="event.html" class="list-group-item">
 						<img src="assets/images/tim-richards.jpg" class="rounded-circle" alt="Tim Richards">
 						<div class="list-text">
 						<h5 class="list-group-item-heading text-primary text-left">Tim Richards' Party!</h5>
 						<p class="list-group-item-text text-muted text-left">Where: Amherst, MA</p>
 						</div>
-						<a href="#" class="list-group-item">
+						<a href="event.html" class="list-group-item">
 						<img src="assets/images/tim-richards.jpg" class="rounded-circle" alt="Tim Richards">
 						<div class="list-text">
 						<h5 class="list-group-item-heading text-primary text-left">Tim Richards' Party Pt. 2!</h5>
 						<p class="list-group-item-text text-muted text-left">Where: Amherst, MA</p>
 						</div>
-						<a href="#" class="list-group-item">
+						<a href="event.html" class="list-group-item">
 						<img src="assets/images/tim-richards.jpg" class="rounded-circle" alt="Tim Richards">
 						<div class="list-text">
 						<h5 class="list-group-item-heading text-primary text-left">Tim Richards' Party!</h5>
 						<p class="list-group-item-text text-muted text-left">Where: Amherst, MA</p>
 						</div>
-						<a href="#" class="list-group-item">
+						<a href="event.html" class="list-group-item">
 						<img src="assets/images/tim-richards.jpg" class="rounded-circle" alt="Tim Richards">
 						<div class="list-text">
 						<h5 class="list-group-item-heading text-primary text-left">Tim Richards' Party!</h5>
 						<p class="list-group-item-text text-muted text-left">Where: Amherst, MA</p>
 						</div>
-						<a href="#" class="list-group-item">
+						<a href="event.html" class="list-group-item">
 						<img src="assets/images/tim-richards.jpg" class="rounded-circle" alt="Tim Richards">
 						<div class="list-text">
 						<h5 class="list-group-item-heading text-primary text-left">Tim Richards' Party!</h5>
@@ -147,7 +154,7 @@
 			<div class="col-md-4">
 			<h3><a class="main-col-head" href="maps.html">Map</a><h3>
 			<div id="mapid" style="width: 350px; height: 400px;" class = "home-item"></div>
-			<script src = "maps.js">
+			<script src = "./assets/js/maps.js">
 			</script>
 			</div>
 			</div>

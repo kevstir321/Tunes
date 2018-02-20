@@ -68,8 +68,8 @@ div.scrollmenu a:hover {
             <div class="dropdown">
                 <a href="#pablo" class=" btn btn-default dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink1"> Tim Richards</a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-                    <a class="dropdown-item " href="#">My Profile</a>
-                    <a class="dropdown-item " href="settings.html">Settings</a>
+                    <a class="dropdown-item " href="profile.html">My Profile</a>
+                    <a class="dropdown-item " href="#">Settings</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Logout</a>
                 </ul>
@@ -109,57 +109,100 @@ div.scrollmenu a:hover {
         </div>
         <div class="container-fluid">
              <div class = "row">
-                <div class="col-sm-3" style="background-color:lavender;">.</div>
-                <div class="col-sm-3" style="background-color:lavenderblush;">.</div>
-                <div class="col-sm-3" style="background-color:lavender;">.</div>
-                <div class="col-sm-3" style="background-color:lavenderblush;">.</div>
-            </div>
-            <div class = "row">
-                <div class="col-sm-3" style="background-color:lavender;">.</div>
-                <div class="col-sm-3" style="background-color:lavenderblush;">.</div>
-                <div class="col-sm-3" style="background-color:lavender;">.</div>
-                <div class="col-sm-3" style="background-color:lavenderblush;">.</div>
-            </div>
-             <div class = "row">
-                <div class="col-sm-3" style="background-color:lavender;">.</div>
-                <div class="col-sm-3" style="background-color:lavenderblush;">.</div>
-                <div class="col-sm-3" style="background-color:lavender;">.</div>
-                <div class="col-sm-3" style="background-color:lavenderblush;">.</div>
+                <div class="col-sm-10"> </div>
+                <div class="col-sm-2"> 
+                    <button type="button" class="btn btn-primary">Remove Albums</button>
             </div>
         </div>
         <div class="container-fluid">
             <div class = "row">
                 <div class="col-md-3">
+                    <h3 class="text-center"> Change Password</h3>
+                    <form>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="now-ui-icons ui-1_email-85"></i></span>
+                            <input id="email" type="text" class="form-control" name="email" placeholder="Email">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="now-ui-icons ui-1_lock-circle-open"></i></span>
+                            <input id="password" type="password" class="form-control" name="password" placeholder="Current Password">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="now-ui-icons ui-1_lock-circle-open"></i></span>
+                            <input id="password" type="password" class="form-control" name="password" placeholder="New Password">
+                        </div>
+                    </form>
+                    <button type="button" class="btn btn-primary ">Change Password</button>
+                </div>
+                <div class="col-md-2">
                     <h3 class="text-center"> Hola!</h3>
                     <div class="alert alert-success text-white">
                         <strong>Hello!</strong> I am a faculty member at University of Massachusetts Amherst and looking to create a music band.
                     </div> 
+                    <form>
+                        <div class="input-group">
+                                <span class="input-group-addon"><i class="now-ui-icons emoticons_satisfied"></i></span>
+                                <input id="password" type="password" class="form-control" name="password" placeholder="New Greetings">
+                        </div>
+                    </form>
+                    <button type="button" class="btn btn-primary ">Change Greetings</button>
                 </div>
                 <div class="col-md-3">
                     <h3 class="text-center"> Personal Info</h3>
-                    <div class="alert alert-info">
-                        <strong>DOB:</strong> MM/DD/YYYY</br>
-                        <strong>Location:</strong> Amhest, MA</br>
-                        <strong>Hobby:</strong> Listening to Music</br>
-                        <strong>Music Genres:</strong> Rock, Pop, Hip Hop ...,</br>
-                        <strong>Email:</strong> xxx@gmail.com</br>
-
-                    </div> 
+                    <form>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="now-ui-icons business_badge"></i></span>
+                            <input id="msg" type="DOB" class="form-control" name="msg" placeholder="Birth Date">
+                            <button type="button" class="btn btn-primary ">Change Date</button>
+                        </div>
+                        
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="now-ui-icons location_pin"></i></span>
+                            <input id="msg" type="" class="form-control" name="msg" placeholder="Current Location">
+                            <button type="button" class="btn btn-primary ">Change Location</button>
+                        </div>
+                         
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="now-ui-icons media-2_note-03"></i></span>
+                            <input id="msg" type="" class="form-control" name="msg" placeholder="Music genres">
+                            <button type="button" class="btn btn-primary ">Change Genres</button>
+                        </div>
+                         
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="now-ui-icons tech_controller-modern"></i></span>
+                            <input id="msg" type="" class="form-control" name="msg" placeholder="Hobby">
+                            <button type="button" class="btn btn-primary ">Change Hobby</button>
+                        </div>        
+                    </form>
                 </div>
-                <div class="col-md-3">
-                    <h3 class="text-center"> Recent Activities </h3>
+                <div class="col-md-2">
+                    <h3 class="text-center"> Activities </h3>
                     <div class="alert alert-warning text-primary">
                         <strong>Amherst, MA: </strong> Rock Music Concert</br>
                         <strong>Boston, MA:</strong> Bon Jovi's Concert</br>
                         <strong>Burlington, MA</strong> Hip Hop Night</br>
                     </div> 
+                    <form>
+                        <div class="input-group">
+                                <span class="input-group-addon"><i class="now-ui-icons business_bank"></i></span>
+                                <input id="password" type="password" class="form-control" name="password" placeholder="New Event">
+                        </div>
+                    </form>
+                    <button type="button" class="btn btn-primary ">Add Event</button>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <h3 class="text-center"> Miscellaneous </h3>
                     <div class="alert alert-danger">
                         <string>Something</strong> related to the user will be written here. </br>
                             bla bla bla </br> bla bla bla bla bla bla
                     </div> 
+                    <form>
+                        <div class="input-group">
+                                <span class="input-group-addon"><i class="now-ui-icons travel_info"></i></span>
+                                <input id="password" type="password" class="form-control" name="password" placeholder="New Info">
+                        </div>
+                    </form>
+                    <button type="button" class="btn btn-primary ">Add Info</button>
                 </div>
             </div>
         </div>

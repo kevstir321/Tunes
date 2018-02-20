@@ -2,6 +2,7 @@
 <html lang="en">
 
 
+
 <head>
     <style>
 div.scrollmenu {
@@ -34,7 +35,7 @@ div.scrollmenu a:hover {
     <!-- CSS Files -->
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
-    <link href="./assets/css/mapstyle.css" rel="stylesheet" />
+    <link href="mapstyle.css" rel="stylesheet" />
      <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
@@ -46,40 +47,46 @@ div.scrollmenu a:hover {
 </head>
 
 <body class="sidebar-collapse">
-      <!-- Navbar -->
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-primary">
     <div class="container">
-            <div class="navbar-translate">
-                <button class="navbar-toggler navbar-toggler-right navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-bar"></span>
-                    <span class="navbar-toggler-bar"></span>
-                    <span class="navbar-toggler-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html"><img src="assets/images/Tunes-logo.png" height="40" width="200"></a>
-                
-            </div>
-            <div class="collapse navbar-collapse" id="navbarToggler">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="people.html" class="nav-link"><i class="now-ui-icons business_globe" ></i>PEOPLE</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="maps.html" class="nav-link"><i class="now-ui-icons location_pin"></i>MAP</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="dropdown">
-                <a href="#pablo" class=" btn btn-default dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink1"> Tim Richards</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-                    <a class="dropdown-item " href="my-profile.html">My Profile</a>
-                    <a class="dropdown-item " href="settings.html">Settings</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Logout</a>
-                </ul>
-            </div>
+        <div class="navbar-translate">
+            <a class="navbar-brand" href="index.html">
+               Tunes
+           </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar bar1"></span>
+            <span class="navbar-toggler-bar bar2"></span>
+            <span class="navbar-toggler-bar bar3"></span>
+        </button>
+
+
         </div>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#pablo">People</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="maps.html">Map</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">Profile</a>
+                    <ul class="dropdown-menu">
+                        <li class="prof-item"><a href="#">Login</a></li>
+                        <li class="prof-item"><a href="#">Settings</a></li>
+                        <li class="prof-item"><a href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
 </nav>
-    <!-- End Navbar -->
+</body>
+<!-- End Navbar -->
+
 <div class="container">
 
 
@@ -90,7 +97,7 @@ div.scrollmenu a:hover {
 
         <div class="col-md-2">
             <div alginclass="thumbnail">
-                <img src="./assets/images/tim-richards.jpg" class="rounded-circle" alt="Tim Richards">
+                <img src="images/tim-richards.jpg" class="rounded-circle" alt="Tim Richards">
             </div>
         </div>
         <div class="col-md-5"?>
@@ -105,6 +112,13 @@ div.scrollmenu a:hover {
         </div>
     </div>
 
+</div>
+
+
+
+
+
+
 
     <div class="row">
         <div class="col-md-1">
@@ -112,12 +126,12 @@ div.scrollmenu a:hover {
         <div class="col-md-10">
             <h2 class="text-center">In rotation</h2>
             <div class="scrollmenu">
-                <img src="./assets/images/blond.jpg" alt="Blond" width =23%>
-                <img src="./assets/images/brockhampton.jpg" alt="Brockhampton" width =23%>
-                <img src="./assets/images/November.jpg" alt="November" width =23%>
-                <img src="./assets/images/ctrl.jpg" alt=CTRL width= 23%>
-                <img src="./assets/images/currents.jpg" alt=currents width= 23%>
-                <img src="./assets/images/TLOP.jpg" alt=TLOP width= 23%>
+                <img src="images/blond.jpg" alt="Blond" width =23%>
+                <img src="images/brockhampton.jpg" alt="Brockhampton" width =23%>
+                <img src="images/November.jpg" alt="November" width =23%>
+                <img src="images/ctrl.jpg" alt=CTRL width= 23%>
+                <img src="images/currents.jpg" alt=currents width= 23%>
+                <img src="images/TLOP.jpg" alt=TLOP width= 23%>
             </div>
         </div>      
         <div class="col-md-1">
@@ -137,11 +151,9 @@ div.scrollmenu a:hover {
                 <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcBWIGoYBM5M" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
                 <iframe src="https://open.spotify.com/embed?uri=spotify:user:129620582:playlist:0FThqYz4rxjsKJZDsYNfQP" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
             </div>
-        </div>
-        
+        </div> 
         <div class="col-md-1">
         </div>
-
     </div>
 
 
@@ -159,7 +171,45 @@ div.scrollmenu a:hover {
     </div>
 
 
+
+
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+            <h1></h1>
+            <h3 class="text-center">Events </h1>
+                <div class="list-group">
+  <a href="#" class="list-group-item active">
+    <h4 class="list-group-item-heading">Tim is going to Spring Concert</h4>
+    <p class="list-group-item-text">Location: Mullins Center. Amherst,MA</p>
+  </a>
+  <a href="#" class="list-group-item">
+    <h4 class="list-group-item-heading">Tim wants to go to TDE: Championship Tour</h4>
+    <p class="list-group-item-text">Location: Mansfiled, MA</p>
+  </a>
+  <a href="#" class="list-group-item">
+    <h4 class="list-group-item-heading">Tim went to The Life of Pablo Tour</h4>
+    <p class="list-group-item-text">Location: TD Garden. Boston, MA</p>
+  </a>
 </div>
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
 
 
 

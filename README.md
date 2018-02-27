@@ -3,7 +3,7 @@
 ## Project Members
 
 Kevin Alarcon  
-Munkherdene Baatarsuren  
+Munkh-Erdene Baatarsuren  
 Kyle Godinho  
 Evan Moore  
 Damain Moquin  

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
+from .models import Event
 
 def index(request):
     """
@@ -17,3 +18,8 @@ def index(request):
     'index.html',
     context={}
     )
+
+from django.views import generic
+
+class EventDetailView(generic.DetailView):
+    model = Event

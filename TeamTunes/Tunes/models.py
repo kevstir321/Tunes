@@ -76,11 +76,6 @@ class Song(models.Model):
 		"""
 		return self.name
 
-	def get_absolute_url(self):
-		"""
-		Returns the url to access a particular song instance.
-		"""
-		return reverse('song-detail', args=[str(self.id)])
 
 class Album(models.Model):
 	"""
@@ -97,11 +92,6 @@ class Album(models.Model):
 		"""
 		return self.name
 
-	def get_absolute_url(self):
-		"""
-		Returns the url to access a particular album instance.
-		"""
-		return reverse('song-detail', args=[str(self.id)])
 
 class Genre(models.Model):
 	"""
@@ -115,11 +105,6 @@ class Genre(models.Model):
 		"""
 		return self.name
 
-	def get_absolute_url(self):
-		"""
-		Returns the url to access a particular genre instance.
-		"""
-		return reverse('song-detail', args=[str(self.id)])
 
 class Artist(models.Model):
 	"""
@@ -133,11 +118,6 @@ class Artist(models.Model):
 		"""
 		return self.name
 
-	def get_absolute_url(self):
-		"""
-		Returns the url to access a particular artist instance.
-		"""
-		return reverse('song-detail', args=[str(self.id)])
 
 class Location(models.Model):
 	"""
@@ -151,9 +131,3 @@ class Location(models.Model):
 		String for representing the Model object (in Admin site etc.)
 		"""
 		return self.name
-
-	def get_absolute_url(self):
-		"""
-		Returns the url to access a particular location instance.
-		"""
-		return reverse('song-detail', args=[str(self.id)])

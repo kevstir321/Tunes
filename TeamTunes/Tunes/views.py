@@ -22,6 +22,7 @@ def index(request):
         users.append(user)
         num = num + 1
 
+    #get random events
 
     events = []
     num_events = Event.objects.all().count()
@@ -33,9 +34,6 @@ def index(request):
             break
         events.append(event)
         num = num + 1
-
-
-    #Get List of random Events
 
 
     #render HTML

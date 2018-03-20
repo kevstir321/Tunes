@@ -18,7 +18,7 @@
                         {% if user %}
                             {% for u in user %}
 
-                                <a href="" class="list-group-item">
+                                <a href="{{ u.get_absolute_url }}" class="list-group-item">
         						<img src="{% static 'images/tim-richards.jpg' %}" class="rounded-circle" alt="Tim Richards">
         						<div class="list-text">
         						<h5 class="list-group-item-heading text-primary text-left">{{ u.name }}</h5>

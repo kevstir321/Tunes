@@ -49,3 +49,6 @@ from django.views import generic
 
 class EventDetailView(generic.DetailView):
     model = Event
+
+class UserDetailView(generic.DetailView):
+    model = User

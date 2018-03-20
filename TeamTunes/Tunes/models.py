@@ -68,6 +68,7 @@ class Song(models.Model):
 	name = models.CharField(max_length=100)
 	artist = models.ManyToManyField('Artist', related_name="song_artist")
 	album = models.ManyToManyField('Album', related_name="song_album")
+	embed_code = models.CharField(max_length=250)
 	
 	def __str__(self):
 		"""
@@ -100,7 +101,7 @@ class Album(models.Model):
 		"""
 		Returns the url to access a particular album instance.
 		"""
-		return reverse('song-detail', args=[str(self.id)])
+		return reverse('album-detail', args=[str(self.id)])
 
 class Genre(models.Model):
 	"""
@@ -118,7 +119,7 @@ class Genre(models.Model):
 		"""
 		Returns the url to access a particular genre instance.
 		"""
-		return reverse('song-detail', args=[str(self.id)])
+		return reverse('genre-detail', args=[str(self.id)])
 
 class Artist(models.Model):
 	"""
@@ -136,7 +137,7 @@ class Artist(models.Model):
 		"""
 		Returns the url to access a particular artist instance.
 		"""
-		return reverse('song-detail', args=[str(self.id)])
+		return reverse('artist-detail', args=[str(self.id)])
 
 class Location(models.Model):
 	"""
@@ -155,6 +156,23 @@ class Location(models.Model):
 		"""
 		Returns the url to access a particular location instance.
 		"""
-		return reverse('song-detail', args=[str(self.id)])
+		return reverse('location-detail', args=[str(self.id)])
 
+class Playlist(models.Model):
+	"""
+	Model representing a location.
+	"""
+	name = models.ForeignKey('User', on_delete=models.SET_NULL, null = True, related_name = "playlist_user")
+	embed_code = models.CharField(max_length=250)
 
+	def __str__(self):
+		"""
+		String for representing the Model object (in Admin site etc.)
+		"""
+		return self.name
+
+	def get_absolute_url(self):
+		"""
+		Returns the url to access a particular location instance.
+		"""
+		return reverse('playlist-detail', args=[str(self.id)])

@@ -14,16 +14,26 @@ def index(request):
     num_users = User.objects.all().count()
     num = 0
     users = []
-    hold = User.objects.order_by('?')
+    userhold = User.objects.order_by('?')
 
-    for user in hold:
-        if num > 5 or num > num_users-1:
+    for user in userhold:
+        if num >= 6 or num > num_users-1:
             break
         users.append(user)
         num = num + 1
 
 
     events = []
+    num_events = Event.objects.all().count()
+    num = 0
+    eventhold = Event.objects.order_by('?')
+
+    for event in eventhold:
+        if num >= 6 or num > num_events-1:
+            break
+        events.append(event)
+        num = num + 1
+
 
     #Get List of random Events
 
@@ -32,7 +42,7 @@ def index(request):
     return render(
     request,
     'index.html',
-    context={"user": users, "events": events, "num": num_users}
+    context={"user": users, "event": events}
     )
 
 from django.views import generic

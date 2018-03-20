@@ -1,16 +1,17 @@
 from django.db import models
-import uuid 
+from django.urls import reverse #Used to generate URLs by reversing the URL patterns
+import uuid
 
 # Create your models here.
 class User(models.Model):
 	"""
-	Model representing a user of the site. 
+	Model representing a user of the site.
 	"""
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this user")
 	name = models.CharField(max_length=100)
 	bio = models.TextField()
 	events_hosting = models.ManyToManyField('Event', related_name = "user_events_hosting", blank = True, null = True)
-	events_attending = models.ManyToManyField('Event', related_name = "user_events_attending", blank = True, null = True) 
+	events_attending = models.ManyToManyField('Event', related_name = "user_events_attending", blank = True, null = True)
 	events_attended = models.ManyToManyField('Event', related_name = "user_events_attended",  blank = True, null = True)
 	anthem = models.ForeignKey('Song', on_delete=models.SET_NULL, null = True, related_name = "user_anthem")
 	location = models.ForeignKey('Location', on_delete=models.SET_NULL, null = True, related_name = "user_location")
@@ -34,7 +35,7 @@ class User(models.Model):
 		Returns the url to access a particular user instance.
 		"""
 		return reverse('user-detail', args=[str(self.id)])
-	
+
 class Event(models.Model):
 	"""
 	Model representing an event listing.
@@ -48,7 +49,7 @@ class Event(models.Model):
 	image = models.ImageField(blank = True, null = True)#upload_to=)
 	host = models.ForeignKey('User', on_delete=models.CASCADE, related_name = "event_host")
 	people = models.ManyToManyField('User', related_name = "people_attending")
-	
+
 	def __str__(self):
 		"""
 		String for representing the Model object (in Admin site etc.)
@@ -68,7 +69,7 @@ class Song(models.Model):
 	name = models.CharField(max_length=100)
 	artist = models.ManyToManyField('Artist', related_name="song_artist")
 	album = models.ManyToManyField('Album', related_name="song_album")
-	
+
 	def __str__(self):
 		"""
 		String for representing the Model object (in Admin site etc.)
@@ -89,7 +90,7 @@ class Album(models.Model):
 	artist = models.ManyToManyField('Artist', related_name="album_artist")
 	genre = models.ManyToManyField('Genre', related_name="album_genre")
 	art = models.ImageField()#upload_to=)
-	
+
 	def __str__(self):
 		"""
 		String for representing the Model object (in Admin site etc.)
@@ -156,5 +157,3 @@ class Location(models.Model):
 		Returns the url to access a particular location instance.
 		"""
 		return reverse('song-detail', args=[str(self.id)])
-
-

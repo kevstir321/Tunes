@@ -3,5 +3,41 @@
 {% block content %}
 {% load static %}
 
+{% block title %}<title>{{ event.name }}</title>{% endblock %}
+{% block extra_head %}
+    <!-- Additional CSS Files -->
+    <link href="{% static 'css/eventstyle.css' %}" rel="stylesheet" />
+ 
+{% endblock %}
+
+{% block extra_body %}
+<body>
+    <div class="text-center" id="allthings">
+		<div class="row justify-content-left">
+			
+            
+            <div class="col-md-3" id="leftcol">
+                <a href="https://bostoncalling.frontgatetickets.com/" id="eventlink">
+                    <img src="{% static 'images/bcfest.jpg' %}" alt="Rounded Image" class="rounded" id="eventpic">
+                </a>
+                <div class="checkbox" id=checksection>
+                    <input id="checkbox1" type="checkbox">
+                    <label for="checkbox1" id=checkboxtext>
+                        I'm Going to This Event!
+                    </label>
+                </div>
+                
+                <h3><a class="main-col-head" href="#">People Going</a></h3>
+					<div class="list-group">
+						
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+    
+    
+{% endblock %}
+
 
 {% endblock %}

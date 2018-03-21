@@ -27,7 +27,7 @@
 
 <body class="sidebar-collapse">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-primary">
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary">
     <div class="container">
             <div class="navbar-translate">
                 <button class="navbar-toggler navbar-toggler-right navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@
                     <span class="navbar-toggler-bar"></span>
                     <span class="navbar-toggler-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><img src="{% static 'images/Tunes-logo.png' %}" height="40" width="200"></a>
+                <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/Tunes-logo.png' %}" height="40" width="200"></a>
 
             </div>
             <div class="collapse navbar-collapse" id="navbarToggler">

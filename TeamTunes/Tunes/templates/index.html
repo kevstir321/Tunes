@@ -15,89 +15,45 @@
 			<div class="col-md-4">
 				<h3><a class="main-col-head" href="people.html">People</a><h3>
 					<div class="list-group">
-						<a href="Profile.html" class="list-group-item">
-						<img src="{% static 'images/tim-richards.jpg' %}" class="rounded-circle" alt="Tim Richards">
-						<div class="list-text">
-						<h5 class="list-group-item-heading text-primary text-left">Tim Richards</h5>
-						<p class="list-group-item-text text-muted text-left">Listening to: Father Stretch My Hands Pt. 1</p>
-						</div>
-						</a>
-                        <a href="Profile.html" class="list-group-item">
-						<img src="{% static 'images/tim-richards.jpg' %}" class="rounded-circle" alt="Tim Richards">
-						<div class="list-text">
-						<h5 class="list-group-item-heading text-primary text-left">Tim Richards</h5>
-						<p class="list-group-item-text text-muted text-left">Listening to: Father Stretch My Hands Pt. 1</p>
-						</div>
-						</a>
-                        <a href="Profile.html" class="list-group-item">
-						<img src="{% static 'images/tim-richards.jpg' %}" class="rounded-circle" alt="Tim Richards">
-						<div class="list-text">
-						<h5 class="list-group-item-heading text-primary text-left">Tim Richards</h5>
-						<p class="list-group-item-text text-muted text-left">Listening to: Father Stretch My Hands Pt. 1</p>
-						</div>
-						</a>
-                        <a href="Profile.html" class="list-group-item">
-						<img src="{% static 'images/tim-richards.jpg' %}" class="rounded-circle" alt="Tim Richards">
-						<div class="list-text">
-						<h5 class="list-group-item-heading text-primary text-left">Tim Richards</h5>
-						<p class="list-group-item-text text-muted text-left">Listening to: Father Stretch My Hands Pt. 1</p>
-						</div>
-						</a>
-                        <a href="Profile.html" class="list-group-item">
-						<img src="{% static 'images/tim-richards.jpg' %}" class="rounded-circle" alt="Tim Richards">
-						<div class="list-text">
-						<h5 class="list-group-item-heading text-primary text-left">Tim Richards</h5>
-						<p class="list-group-item-text text-muted text-left">Listening to: Father Stretch My Hands Pt. 1</p>
-						</div>
-						</a>
-                        <a href="Profile.html" class="list-group-item">
-						<img src="{% static 'images/tim-richards.jpg' %}" class="rounded-circle" alt="Tim Richards">
-						<div class="list-text">
-						<h5 class="list-group-item-heading text-primary text-left">Tim Richards</h5>
-						<p class="list-group-item-text text-muted text-left">Listening to: Father Stretch My Hands Pt. 1</p>
-						</div>
-						</a>
+                        {% if user %}
+                            {% for u in user %}
+
+                                <a href="{{ u.get_absolute_url }}" class="list-group-item">
+        						<img src="{% static 'images/tim-richards.jpg' %}" class="rounded-circle" alt="Tim Richards">
+        						<div class="list-text">
+        						<h5 class="list-group-item-heading text-primary text-left">{{ u.name }}</h5>
+        						<p class="list-group-item-text text-muted text-left">{{ u.anthem }}</p>
+        						</div>
+        						</a>
+
+                            {% endfor %}
+
+                        {% else %}
+                        <p>No Users :(</p>
+                        {% endif %}
 
 					</div>
 			</div>
 			<div class="col-md-4">
 				<h3><a class="main-col-head" href="event.html">Events</a><h3>
 					<div class="list-group">
-						<a href="event.html" class="list-group-item">
-						<img src="{% static 'images/tim-richards.jpg' %}" class="rounded-circle" alt="Tim Richards">
-						<div class="list-text">
-						<h5 class="list-group-item-heading text-primary text-left">Tim Richards' Party!</h5>
-						<p class="list-group-item-text text-muted text-left">Where: Amherst, MA</p>
-						</div>
-                        </a>
-                        <a href="event.html" class="list-group-item">
-						<img src="{% static 'images/tim-richards.jpg' %}" class="rounded-circle" alt="Tim Richards">
-						<div class="list-text">
-						<h5 class="list-group-item-heading text-primary text-left">Tim Richards' Party!</h5>
-						<p class="list-group-item-text text-muted text-left">Where: Amherst, MA</p>
-						</div>
-                        </a>
-                        <a href="event.html" class="list-group-item">
-						<img src="{% static 'images/tim-richards.jpg' %}" class="rounded-circle" alt="Tim Richards">
-						<div class="list-text">
-						<h5 class="list-group-item-heading text-primary text-left">Tim Richards' Party!</h5>
-						<p class="list-group-item-text text-muted text-left">Where: Amherst, MA</p>
-						</div>
-                        </a>
-                        <a href="event.html" class="list-group-item">
-						<img src="{% static 'images/tim-richards.jpg' %}" class="rounded-circle" alt="Tim Richards">
-						<div class="list-text">
-						<h5 class="list-group-item-heading text-primary text-left">Tim Richards' Party!</h5>
-						<p class="list-group-item-text text-muted text-left">Where: Amherst, MA</p>
-						</div>
-                        </a>
-                        <a href="event.html" class="list-group-item">
-						<img src="{% static 'images/tim-richards.jpg' %}" class="rounded-circle" alt="Tim Richards">
-						<div class="list-text">
-						<h5 class="list-group-item-heading text-primary text-left">Tim Richards' Party!</h5>
-						<p class="list-group-item-text text-muted text-left">Where: Amherst, MA</p>
-						</div>
-                        </a>
+
+                        {% if event %}
+                            {% for e in event %}
+                                <a href="{{ e.get_absolute_url }}" class="list-group-item">
+                                <img src="{% static 'images/tim-richards.jpg' %}" class="rounded-circle" alt="Tim Richards">
+                                <div class="list-text">
+                                <h5 class="list-group-item-heading text-primary text-left">{{ e.name }}</h5>
+                                <p class="list-group-item-text text-muted text-left">{{ e.location }}</p>
+                                </div>
+                                </a>
+
+                            {% endfor %}
+
+                        {% else %}
+                        <p>No Events :(</p>
+                        {% endif %}
+
 					</div>
 			</div>
 			<div class="col-md-4">

@@ -23,6 +23,9 @@ class User(models.Model):
 	hobbies = models.CharField(max_length=200)
 	email = models.EmailField(blank = True, null = True)
 	current_song = models.ForeignKey('Song', blank = True, null = True, on_delete=models.SET_NULL, related_name = "user_current_song", help_text="Currently listened to song")
+	profile_picture = models.ImageField(blank = True, null = True)#upload_to=)
+	latitude = models.DecimalField(max_digits=9, decimal_places=6)
+	longitude = models.DecimalField(max_digits=9, decimal_places=6)
 
 	def __str__(self):
 		"""
@@ -49,6 +52,9 @@ class Event(models.Model):
 	image = models.ImageField(blank = True, null = True)#upload_to=)
 	host = models.ForeignKey('User', on_delete=models.CASCADE, related_name = "event_host")
 	people = models.ManyToManyField('User', related_name = "people_attending")
+	web_link = models.CharField(max_length=250)
+	latitude = models.DecimalField(max_digits=9, decimal_places=6)
+	longitude = models.DecimalField(max_digits=9, decimal_places=6)
 
 	def __str__(self):
 		"""
@@ -69,6 +75,7 @@ class Song(models.Model):
 	name = models.CharField(max_length=100)
 	artist = models.ManyToManyField('Artist', related_name="song_artist")
 	album = models.ManyToManyField('Album', related_name="song_album")
+	embed_code = models.CharField(max_length=250)
 
 	def __str__(self):
 		"""
@@ -92,7 +99,6 @@ class Album(models.Model):
 		"""
 		return self.name
 
-
 class Genre(models.Model):
 	"""
 	Model representing a genre.
@@ -104,7 +110,6 @@ class Genre(models.Model):
 		String for representing the Model object (in Admin site etc.)
 		"""
 		return self.name
-
 
 class Artist(models.Model):
 	"""
@@ -118,13 +123,25 @@ class Artist(models.Model):
 		"""
 		return self.name
 
-
 class Location(models.Model):
 	"""
 	Model representing a location.
 	"""
 	name = models.CharField(max_length=100, help_text="City Name")
 	state = models.CharField(max_length=100)
+
+	def __str__(self):
+		"""
+		String for representing the Model object (in Admin site etc.)
+		"""
+		return self.name
+
+class Playlist(models.Model):
+	"""
+	Model representing a user playlist.
+	"""
+	name = models.ForeignKey('User', on_delete=models.SET_NULL, null = True, related_name = "playlist_user")
+	embed_code = models.CharField(max_length=250)
 
 	def __str__(self):
 		"""

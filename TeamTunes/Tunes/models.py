@@ -24,7 +24,7 @@ class User(models.Model):
 	email = models.EmailField(blank = True, null = True)
 	current_song = models.ForeignKey('Song', blank = True, null = True, on_delete=models.SET_NULL, related_name = "user_current_song", help_text="Currently listened to song")
 	profile_picture = models.ImageField(blank = True, null = True)#upload_to=)
-	playlists = models.ForeignKey('Playlist', on_delete=models.SET_NULL, null = True, related_name = "playlist_user")
+	playlists = models.ManyToManyField('Playlist', blank = True, null = True, related_name = "playlist_user")
 	latitude = models.DecimalField(max_digits=9, decimal_places=6, blank = True, null = True)
 	longitude = models.DecimalField(max_digits=9, decimal_places=6, blank = True, null = True)
 

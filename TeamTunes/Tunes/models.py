@@ -22,7 +22,8 @@ class User(models.Model):
 	hobbies = models.CharField(max_length=200)
 	email = models.EmailField(blank = True, null = True)
 	current_song = models.ForeignKey('Song', blank = True, null = True, on_delete=models.SET_NULL, related_name = "user_current_song", help_text="Currently listened to song")
-
+	profile picture
+	
 	def __str__(self):
 		"""
 		String for representing the Model object (in Admin site etc.)
@@ -145,6 +146,8 @@ class Location(models.Model):
 	"""
 	name = models.CharField(max_length=100, help_text="City Name")
 	state = models.CharField(max_length=100)
+	lat
+	long
 
 	def __str__(self):
 		"""

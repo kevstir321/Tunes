@@ -17,15 +17,16 @@ class User(models.Model):
 	location = models.ForeignKey('Location', on_delete=models.SET_NULL, null = True, related_name = "user_location")
 	followers = models.ManyToManyField('User', related_name = "user_followers",  blank = True, null = True)
 	following = models.ManyToManyField('User', related_name = "user_following",  blank = True, null = True)
-	models.ManyToManyField('Album')
+	rotation = models.ManyToManyField('Album', blank = True, null = True)
 	favorite_songs = models.ManyToManyField('Song')
 	favorite_genres = models.ManyToManyField('Genre')
 	hobbies = models.CharField(max_length=200)
 	email = models.EmailField(blank = True, null = True)
 	current_song = models.ForeignKey('Song', blank = True, null = True, on_delete=models.SET_NULL, related_name = "user_current_song", help_text="Currently listened to song")
 	profile_picture = models.ImageField(blank = True, null = True)#upload_to=)
-	latitude = models.DecimalField(max_digits=9, decimal_places=6)
-	longitude = models.DecimalField(max_digits=9, decimal_places=6)
+	playlists = models.ForeignKey('Playlist', on_delete=models.SET_NULL, null = True, related_name = "playlist_user")
+	latitude = models.DecimalField(max_digits=9, decimal_places=6, blank = True, null = True)
+	longitude = models.DecimalField(max_digits=9, decimal_places=6, blank = True, null = True)
 
 	def __str__(self):
 		"""
@@ -46,15 +47,16 @@ class Event(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this event")
 	name = models.CharField(max_length=100)
 	location = models.ForeignKey('Location', blank = True, null = True, on_delete=models.SET_NULL, related_name = "event_location")
-	start_time = models.DateTimeField(auto_now_add=True, blank=True)
-	end_time = models.DateTimeField(auto_now_add=True, blank=True)
+	start_time = models.DateTimeField(null=True, blank=True)
+	end_time = models.DateTimeField(null=True, blank=True)
 	description = models.TextField()
 	image = models.ImageField(blank = True, null = True)#upload_to=)
 	host = models.ForeignKey('User', on_delete=models.CASCADE, related_name = "event_host")
 	people = models.ManyToManyField('User', related_name = "people_attending")
-	web_link = models.CharField(max_length=250)
-	latitude = models.DecimalField(max_digits=9, decimal_places=6)
-	longitude = models.DecimalField(max_digits=9, decimal_places=6)
+	web_link = models.URLField(max_length=250, blank = True, null = True)
+	venue = models.CharField(max_length=100, blank = True, null = True)
+	latitude = models.DecimalField(max_digits=9, decimal_places=6, blank = True, null = True)
+	longitude = models.DecimalField(max_digits=9, decimal_places=6, blank = True, null = True)
 
 	def __str__(self):
 		"""
@@ -75,7 +77,7 @@ class Song(models.Model):
 	name = models.CharField(max_length=100)
 	artist = models.ManyToManyField('Artist', related_name="song_artist")
 	album = models.ManyToManyField('Album', related_name="song_album")
-	embed_code = models.CharField(max_length=250)
+	embed_code = models.CharField(max_length=250, blank = True, null = True)
 
 	def __str__(self):
 		"""
@@ -140,8 +142,8 @@ class Playlist(models.Model):
 	"""
 	Model representing a user playlist.
 	"""
-	name = models.ForeignKey('User', on_delete=models.SET_NULL, null = True, related_name = "playlist_user")
-	embed_code = models.CharField(max_length=250)
+	name = models.CharField(max_length=250, blank = True, null = True, help_text="Playlist Name")
+	embed_code = models.CharField(max_length=250, blank = True, null = True)
 
 	def __str__(self):
 		"""

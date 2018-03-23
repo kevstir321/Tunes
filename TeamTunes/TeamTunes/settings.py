@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Tunes.apps.TunesConfig',
+    'leaflet'
 ]
 
 MIDDLEWARE = [
@@ -122,3 +123,11 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LEAFLET_CONFIG = {
+'TILES': [('Streets', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {'attribution': '&copy; Big eye'}), ('Grayscale', 'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {'attribution': '&copy; Contributors'})],
+'DEFAULT_CENTER': (42.3832, -72.5199),
+'DEFAULT_ZOOM': 15,
+'MIN_ZOOM': 3,
+'MAX_ZOOM': 18,
+}

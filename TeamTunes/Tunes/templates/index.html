@@ -58,13 +58,42 @@
 			</div>
 			<div class="col-md-4">
 			<h3><a class="main-col-head" href="maps.html">Map</a><h3>
-			<div id="mapid" style="width: 350px; height: 400px;" class = "home-item"></div>
-			<script src = "{% static 'js/maps.js' %}">
-			</script>
-			</div>
+            {% load leaflet_tags %}
+
+            <head>
+                {% leaflet_js %}
+                {% leaflet_css %}
+            </head>
+            <style>
+
+            .leaflet-container {  /* all maps */
+                width:  400px;
+                height: 400px;
+            }
+            </style>
+            <body>
+            {% if user %}
+             <script type="text/javascript">
+              function map_init_basic (map, options) {
+               var marker = null;
+                {% for u in user %}
+                    marker = new L.marker([{{u.latitude}}, {{u.longitude}}])
+                    //.bindPopup("<b>"+{{u.name}}+"</b>"+"Listening to: "+{{u.currentsong}}+"<a href="{{ u.get_absolute_url }}">")
+                    .addTo(map);  
+                {% endfor %}
+                {% for e in event %}
+                    marker = new L.marker([{{e.latitude}}, {{e.longitude}}])
+                    //.bindPopup()
+                    .addTo(map);  
+                {% endfor %}
+                 }
+                </script>
+            {% else %}
+                <p>No Users are available.</p>
+            {% endif %}
+              {% leaflet_map "yourmap" callback="window.map_init_basic" %}   
+            </body>
 			</div>
 	</div>
-
-
 
 {% endblock %}

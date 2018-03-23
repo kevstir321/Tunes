@@ -50,3 +50,41 @@ class EventDetailView(generic.DetailView):
 
 class UserDetailView(generic.DetailView):
     model = User
+
+
+def maps(request):
+    """
+    For the Map
+    """
+    #Get List of users
+    num_users = User.objects.all().count()
+    num = 0
+    users = []
+    userhold = User.objects.order_by('?')
+
+    for user in userhold:
+        if num > num_users-1:
+            break
+        users.append(user)
+        num = num + 1
+
+    #get events
+
+    events = []
+    num_events = Event.objects.all().count()
+    num = 0
+    eventhold = Event.objects.order_by('?')
+
+    for event in eventhold:
+        if num > num_events-1:
+            break
+        events.append(event)
+        num = num + 1
+
+
+    #render HTML
+    return render(
+    request,
+    'maps.html',
+    context={"user": users, "event": events}
+    )

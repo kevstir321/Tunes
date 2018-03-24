@@ -124,6 +124,8 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+
 LEAFLET_CONFIG = {
 'TILES': [('Streets', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {'attribution': '&copy; Big eye'}), ('Grayscale', 'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {'attribution': '&copy; Contributors'})],
 'DEFAULT_CENTER': (42.3832, -72.5199),

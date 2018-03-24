@@ -1,43 +1,222 @@
 {% extends "base_page.html" %}
 
 {% block content %}
+
 {% load static %}
+{% load staticfiles %}
+
+<head>
 
 {% block title %}<title>{{ event.name }}</title>{% endblock %}
-{% block extra_head %}
     <!-- Additional CSS Files -->
-    <link href="{% static 'css/eventstyle.css' %}" rel="stylesheet" />
+    <link rel='stylesheet' type='text/css' href="{% static 'css/eventstyle.css' %}" />
+    
+</head>
  
-{% endblock %}
 
-{% block extra_body %}
 <body>
     <div class="text-center" id="allthings">
 		<div class="row justify-content-left">
 			
             
             <div class="col-md-3" id="leftcol">
-                <a href="https://bostoncalling.frontgatetickets.com/" id="eventlink">
-                    <img src="{% static 'images/bcfest.jpg' %}" alt="Rounded Image" class="rounded" id="eventpic">
-                </a>
-                <div class="checkbox" id=checksection>
-                    <input id="checkbox1" type="checkbox">
-                    <label for="checkbox1" id=checkboxtext>
-                        I'm Going to This Event!
-                    </label>
+                <div id="imagespace">
+                    <a href="{{ event.web_link }}" id="eventlink">
+                        <img src="{{ event.image.url }}" alt="{{ event.name }}" class="rounded" id="eventpic">
+
+                    </a>
+                    <div class="checkbox" id=checksection>
+                        <input id="checkbox1" type="checkbox">
+                        <label for="checkbox1" id=checkboxtext>
+                            I'm Going to This Event!
+                        </label>
+                    </div>
                 </div>
                 
                 <h3><a class="main-col-head" href="#">People Going</a></h3>
 					<div class="list-group">
-						
+                        {% if event.people %}
+                            {% for u in event.people.all %}
+
+                                <a href="{{ u.get_absolute_url }}" class="list-group-item">
+        						<img src="{{ u.profile_picture.url }}" class="rounded-circle" alt="{{ u.name }}">
+        						<div class="list-text">
+        						<h5 class="list-group-item-heading text-primary text-left">{{ u.name }}</h5>
+        						<p class="list-group-item-text text-muted text-left">{{ u.anthem }}</p>
+        						</div>
+        						</a>
+
+                            {% endfor %}
+
+                        {% else %}
+                        <p>No Users :(</p>
+                        {% endif %}
                     </div>
             </div>
+            <div class="col-md-6" id=maininfo>
+                <h1 class="list-group-item-heading text-primary text-center" id="eventname">{{ event.name }}</h1>
+                <h2 class="list-group-item-heading text-primary text-center" id="eventdate">Begins: {{ event.start_time }}</h2>
+                <h2 class="list-group-item-heading text-primary text-center" id="eventdate">Ends: {{ event.end_time }}</h2>
+                <h2 class="list-group-item-heading text-primary text-center" id="eventlocation">{{ event.venue }} – {{ event.location }}</h2>
+                <div class="typography-line" id=eventdesc>
+                    <blockquote>
+                        <p class="blockquote blockquote-primary">
+                            {{ event.description }}   
+                        </p>
+                    </blockquote>
+                </div>
+                <h1 class="list-group-item-heading text-primary text-center"><a href="{{ event.web_link }}" id="eventlink">Official Event Page &ensp; &ensp;</a></h1>
+            </div>
+            
+            <div class="col-md-3" id="eventbar">
+				<h3><a class="main-col-head" href="#">Other Events</a></h3>
+					<div class="list-group">
+                        {% if event.other_events %}
+                            {% for e in event.other_events.all %}
+
+                                <a href="{{ e.get_absolute_url }}" class="list-group-item">
+                                <img src="{{ e.image.url }}" class="rounded-circle" alt="{{ e.name }}">
+                                <div class="list-text">
+                                <h5 class="list-group-item-heading text-primary text-left">{{ e.name }}</h5>
+                                <p class="list-group-item-text text-muted text-left">{{ e.location }}</p>
+                                </div>
+                                </a>
+
+                            {% endfor %}
+
+                        {% else %}
+                        <p>No Users :(</p>
+                        {% endif %}
+                    </div>
+            </div>
+            
         </div>
     </div>
+    
+    
+    
+    <style>
+        
+        .dropdown-menu a{
+            color: black !important;
+        }
+
+        .prof-item{
+            text-align: center;
+        }
+
+        .col-md-4{
+            padding-top: 60px;
+            max-width: 100%;
+            max-height: 90%;
+        }
+
+        .list-group{
+            min-height: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .list-group a{
+            font-size: 14px;
+        }
+
+        .list-group img{
+            width: 60px;
+            height: 60px;
+            margin-top: 5px;
+            float: left;
+        }
+
+        .list-text{
+            float: left;
+            display: inline;
+            padding-left: 15px;
+            max-width: 230px;
+
+        }
+
+        .main-col-head{
+            color: black;
+        }
+
+        #leftcol{
+            padding-left: 3%;
+        }
+
+        #eventbar{
+            padding-left: 0%; 
+            padding-right: 3%;
+            padding-top: 19%;
+        }
+
+        #eventpic{
+            display: block;
+            min-width: 60%;
+            max-width: 90%;
+            height: auto;
+            max-height: 80%;
+        }
+
+        #maininfo{
+
+        }
+
+        #eventname{
+            font-size: 60px;
+            padding-bottom: 0%;
+        }
+
+        #eventdate{
+            font-size: 40px;
+            color: black !important;
+        }
+
+        #eventlocation{
+            font-size: 40px;
+            color: black !important;
+
+        }
+
+        #checksection{
+            padding-top: 7%;
+            padding-bottom: 2%;
+            padding-right: 25%;
+        }
+
+        #checkboxtext{
+            font-size: 16px;
+        }
+
+        #eventdesc{
+            padding-right: 0%;
+            padding-top: 6%;
+            font-size: 18px;
+            padding-bottom: 5%;
+        }
+
+        #eventlink{
+            color: black !important;
+            background: url({% static 'images/link.svg' %}) no-repeat 100% 0;
+            background-size: 35px 35px;
+            background-position: bottom 17px left 480px;
+
+        }
+
+        #allthings{
+            padding-top: 5%;
+        }
+        
+        #imagespace{
+            height: 44%;
+        }
+
+    </style>
+
 </body>
     
     
-{% endblock %}
+
 
 
 {% endblock %}

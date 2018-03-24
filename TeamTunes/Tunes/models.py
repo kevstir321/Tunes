@@ -53,6 +53,7 @@ class Event(models.Model):
 	image = models.ImageField(upload_to = 'images/events/', default = 'images/default.jpg', blank = True, null = True)
 	host = models.ForeignKey('User', on_delete=models.CASCADE, related_name = "event_host")
 	people = models.ManyToManyField('User', related_name = "people_attending")
+	other_events = models.ManyToManyField('Event', related_name = "other_events_occuring")
 	web_link = models.URLField(max_length=250, blank = True, null = True)
 	venue = models.CharField(max_length=100, blank = True, null = True)
 	latitude = models.DecimalField(max_digits=9, decimal_places=6, blank = True, null = True)

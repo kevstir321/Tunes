@@ -52,6 +52,8 @@ class UserDetailView(generic.DetailView):
     model = User
 
 
+
+
 def maps(request):
     """
     For the Map

@@ -78,12 +78,12 @@
                var marker = null;
                 {% for u in user %}
                     marker = new L.marker([{{u.latitude}}, {{u.longitude}}])
-                    //.bindPopup("<b>"+{{u.name}}+"</b>"+"Listening to: "+{{u.currentsong}}+"<a href="{{ u.get_absolute_url }}">")
+                    .bindPopup("<a href="+"{{ u.get_absolute_url }}"+">"+"<b>"+"{{u.name}}"+"</b>"+"</a><br>"+"Listening to: "+"{{u.current_song}}"+"<br>")
                     .addTo(map);  
                 {% endfor %}
                 {% for e in event %}
                     marker = new L.marker([{{e.latitude}}, {{e.longitude}}])
-                    //.bindPopup()
+                    .bindPopup("<a href="+"{{ e.get_absolute_url }}"+">"+"<b>"+"{{e.name}}"+"</b>"+"</a><br>"+"{{e.start_time}}")
                     .addTo(map);  
                 {% endfor %}
                  }

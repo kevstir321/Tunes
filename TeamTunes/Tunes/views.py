@@ -130,3 +130,13 @@ def my_profile(request):
         context={"logged_in_user": logged_in_user, "background_picture": background_picture, "events_attended": events_attended, "num_of_following": num_of_following, "num_of_followers": num_of_followers, "events_attending": events_attending, "events_hosting": events_hosting}
         )
 
+def settings(request):
+    logged_in_user = User.objects.get(name = "Tim Richards")
+    background_picture = Event.objects.get(name = "Boston Calling Music Festival")
+    return render(
+        request,
+        'settings.html',
+        context={}
+        )
+
+

@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
   <link href="{% static 'css/now-ui-kit.css' %}" rel="stylesheet" />
-  
+
 </head>
 
 <body class="sidebar-collapse">
@@ -46,7 +46,7 @@
                         <a href="people.html" class="nav-link"><i class="now-ui-icons business_globe" ></i>PEOPLE</a>
                     </li>
                     <li class="nav-item">
-                        <a href="maps.html" class="nav-link"><i class="now-ui-icons location_pin"></i>MAP</a>
+                        <a href="{% url 'maps' %}" class="nav-link"><i class="now-ui-icons location_pin"></i>MAP</a>
                     </li>
                 </ul>
             </div>

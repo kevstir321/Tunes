@@ -57,7 +57,7 @@
 					</div>
 			</div>
 			<div class="col-md-4">
-			<h3><a class="main-col-head" href="maps.html">Map</a><h3>
+			<h3><a class="main-col-head" href="{% url 'maps' %}">Map</a><h3>
             {% load leaflet_tags %}
 
             <head>
@@ -79,19 +79,19 @@
                 {% for u in user %}
                     marker = new L.marker([{{u.latitude}}, {{u.longitude}}])
                     .bindPopup("<a href="+"{{ u.get_absolute_url }}"+">"+"<b>"+"{{u.name}}"+"</b>"+"</a><br>"+"Listening to: "+"{{u.current_song}}"+"<br>")
-                    .addTo(map);  
+                    .addTo(map);
                 {% endfor %}
                 {% for e in event %}
                     marker = new L.marker([{{e.latitude}}, {{e.longitude}}])
                     .bindPopup("<a href="+"{{ e.get_absolute_url }}"+">"+"<b>"+"{{e.name}}"+"</b>"+"</a><br>"+"{{e.start_time}}")
-                    .addTo(map);  
+                    .addTo(map);
                 {% endfor %}
                  }
                 </script>
             {% else %}
                 <p>No Users are available.</p>
             {% endif %}
-              {% leaflet_map "yourmap" callback="window.map_init_basic" %}   
+              {% leaflet_map "yourmap" callback="window.map_init_basic" %}
             </body>
 			</div>
 	</div>

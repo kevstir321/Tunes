@@ -139,4 +139,36 @@ def settings(request):
         context={}
         )
 
+def people(request):
+    
+    #Get list of random users
+    num_users = User.objects.all().count()
+    num = 0
+    users = []
+    userhold = User.objects.order_by('?')
+
+    for user in userhold:
+        if num > num_users-1:
+            break
+        users.append(user)
+        num = num + 1
+        
+    #Get songs
+    songs = []
+    num_songs = Song.objects.all().count()
+    num = 0
+    songhold = Song.objects.order_by('?')
+
+    for song in songhold:
+        if num > num_songs-1:
+            break
+        songs.append(song)
+        num = num + 1
+        
+    #render HTML
+        return render(
+    request,
+    'people.html',
+    context={"user": users, "song": songs}
+    )
 

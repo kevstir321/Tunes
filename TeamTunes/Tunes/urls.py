@@ -10,4 +10,5 @@ urlpatterns = [
     path('maps.html', views.maps, name='maps'),
     path('my-profile', views.my_profile, name = "my_profile"),
     path('my-profile/settings', views.settings, name = "settings"),
+    path('people.html', views.people, name='people'),
 ]

@@ -143,7 +143,7 @@
             <h3 class="text-center">Events </h1>
                 <div class="list-group">
                     {% for event in user.events_attending.all %}
-                        <a href="{{ user.get_absolute_url }}" class="list-group-item">
+                        <a href="{{ event.get_absolute_url }}" class="list-group-item">
                         <h4 class="list-group-item-heading">{{ user.name }} is going to {{ event.name }}</h4>
                         <p class="list-group-item-text">Location: 
                         {{ event.location }}</p>

@@ -94,7 +94,7 @@ class Album(models.Model):
 	name = models.CharField(max_length=100)
 	artist = models.ManyToManyField('Artist', related_name="album_artist")
 	genre = models.ManyToManyField('Genre', related_name="album_genre")
-	art = models.ImageField()#upload_to=)
+	art = models.ImageField(upload_to = 'images/albums/')#upload_to=)
 
 
 	def __str__(self):

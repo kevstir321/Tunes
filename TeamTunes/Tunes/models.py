@@ -17,7 +17,7 @@ class User(models.Model):
 	location = models.ForeignKey('Location', on_delete=models.SET_NULL, null = True, related_name = "user_location")
 	followers = models.ManyToManyField('User', related_name = "user_followers",  blank = True, null = True)
 	following = models.ManyToManyField('User', related_name = "user_following",  blank = True, null = True)
-	rotation = models.ManyToManyField('Album', blank = True, null = True)
+	rotation = models.ManyToManyField('Album')
 	favorite_songs = models.ManyToManyField('Song')
 	favorite_genres = models.ManyToManyField('Genre')
 	hobbies = models.CharField(max_length=200)
@@ -96,6 +96,7 @@ class Album(models.Model):
 	genre = models.ManyToManyField('Genre', related_name="album_genre")
 	art = models.ImageField()#upload_to=)
 
+
 	def __str__(self):
 		"""
 		String for representing the Model object (in Admin site etc.)
@@ -144,7 +145,7 @@ class Playlist(models.Model):
 	Model representing a user playlist.
 	"""
 	name = models.CharField(max_length=250, blank = True, null = True, help_text="Playlist Name")
-	embed_code = models.CharField(max_length=250, blank = True, null = True)
+	embed_code = models.CharField(max_length=450, blank = True, null = True)
 
 	def __str__(self):
 		"""

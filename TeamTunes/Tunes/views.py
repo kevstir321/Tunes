@@ -90,3 +90,14 @@ def maps(request):
     'maps.html',
     context={"user": users, "event": events}
     )
+
+def my_profile(request):
+    logged_in_user = User.objects.get(name = "Tim Richards")
+    background_picture = Event.objects.get(name = "Boston Calling Music Festival")
+    event_attended = logged_in_user.events_attended.all()
+    return render(
+        request,
+        'my_profile.html',
+        context={"logged_in_user": logged_in_user, "background_picture": background_picture, "event_attended": event_attended}
+        )
+

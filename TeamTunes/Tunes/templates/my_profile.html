@@ -1,0 +1,110 @@
+{% extends "base_page.html" %}
+{% block style %}
+<style>
+div.scrollmenu {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+    background-color: #777;
+}
+
+.bottom {
+    margin-top: 100px;
+
+}
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+    <!-- End Navbar -->
+    <div class="wrapper">
+        <div class="page-header page-header-small">
+            <div class="page-header-image " data-parallax="true" style="background-image: url('{{background_picture.image.url}}');"></div>
+        </div>
+        <!-- edit start -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <img src="{{logged_in_user.profile_picture.url}}" class="rounded-circle img-thumbnail" alt="Tim Richards" width="284" height="226">
+                </div>
+                <div class="col-md-2">
+                    <h2></h2>
+                    <h3><i class="now-ui-icons users_single-02"></i> Tim Richards</h3>
+                    <h6>Anthem: {{logged_in_user.anthem}}</h6>
+                    <h6>Tuning in from: {{logged_in_user.location}}<h6/>
+                </div>
+                <div class = "col-md-7">
+                    <h5 class="text-center">My Favorites</h6>
+                    <div class="scrollmenu">
+                        <img src="{{background_picture.image.url}}" alt="Blond" width =23%>
+                        <img src="{{background_picture.image.url}}" alt="Brockhampton" width =23%>
+                        <img src="{{background_picture.image.url}}" alt="November" width =23%>
+                        <img src="{{background_picture.image.url}}" alt=CTRL width= 23%>
+                        <img src="{{background_picture.image.url}}" alt=currents width= 23%>
+                        <img src="{{background_picture.image.url}}" alt=TLOP width= 23%>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bottom">
+            <div class = "row">
+                <div class="col-md-3">
+                    <h3 class="text-center"> Account Info</h3>
+                    <div class="alert alert-success text-white">
+                        <strong>Recovery Email </strong> {{logged_in_user.email}}</br>
+                        <strong>Last Password Change:</strong> MM/DD/YYYY</br>
+                        <strong>Primary Location:</strong> {{logged_in_user.location}}</br>
+                    </div> 
+                </div>
+                <div class="col-md-3">
+                    <h3 class="text-center"> Personal Info</h3>
+                    <div class="alert alert-info">
+                        <strong>DOB:</strong> MM/DD/YYYY</br>
+                        <strong>Location:</strong> {{logged_in_user.location}}</br>
+                        <strong>Hobby:</strong> Listening to Music</br>
+                        <strong>Music Genres:</strong> Rock, Pop, Hip Hop ...,</br>
+                        <strong>Email:</strong> {{logged_in_user.email}}</br>
+
+                    </div> 
+                </div>
+                <div class="col-md-3">
+                    <h3 class="text-center"> Events Attended </h3>
+                    <div class="alert alert-warning text-primary">
+                        {% if event_attended %}
+                            {% for e in event_attened%}
+                                <strong>{{e.location}} </strong> {{e.name}}</br>
+                            {% endfor %}
+                        {% else %}
+                            <strong> No events attended</strong>
+                        {% endif %}
+                    </div> 
+                </div>
+                <div class="col-md-3">
+                    <h3 class="text-center"> Miscellaneous </h3>
+                    <div class="alert alert-danger">
+                        <string>Something</strong> related to the user will be written here. </br>
+                            bla bla bla </br> bla bla bla bla bla bla
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            
+        </footer> 
+    -->
+    </div>
+</body>
+{% endblock %}

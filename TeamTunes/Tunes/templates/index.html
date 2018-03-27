@@ -13,7 +13,7 @@
 	<div class="container text-center">
 		<div class="row justify-content-center">
 			<div class="col-md-4">
-				<h3><a class="main-col-head" href="people.html">People</a><h3>
+				<h3><a class="main-col-head" href="{% url 'people' %}">People</a><h3>
 					<div class="list-group">
                         {% if user %}
                             {% for u in user %}
@@ -35,7 +35,7 @@
 					</div>
 			</div>
 			<div class="col-md-4">
-				<h3><a class="main-col-head" href="event.html">Events</a><h3>
+				<h3><a class="main-col-head" href="">Events</a><h3>
 					<div class="list-group">
 
                         {% if event %}

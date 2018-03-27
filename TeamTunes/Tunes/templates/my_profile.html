@@ -34,7 +34,7 @@ div.scrollmenu a:hover {
             <div class="page-header-image " data-parallax="true" style="background-image: url('{{background_picture.image.url}}');"></div>
         </div>
         <!-- edit start -->
-        <div class="container-fluid">
+        <div class="container-fluid bg-light">
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
@@ -42,9 +42,11 @@ div.scrollmenu a:hover {
                 </div>
                 <div class="col-md-2">
                     <h2></h2>
-                    <h3><i class="now-ui-icons users_single-02"></i> Tim Richards</h3>
+                    <h3><i class="now-ui-icons users_single-02"></i> {{logged_in_user.name}}</h3>
                     <h6>Anthem: {{logged_in_user.anthem}}</h6>
-                    <h6>Tuning in from: {{logged_in_user.location}}<h6/>
+                    <h6>From: {{logged_in_user.location}}<h6/>
+                    <h6>Followers: {{num_of_followers}}</h6>
+                    <h6>Following: {{num_of_following}}</h6>
                 </div>
                 <div class = "col-md-7">
                     <h5 class="text-center">My Favorites</h6>
@@ -64,28 +66,45 @@ div.scrollmenu a:hover {
                 <div class="col-md-3">
                     <h3 class="text-center"> Account Info</h3>
                     <div class="alert alert-success text-white">
-                        <strong>Recovery Email </strong> {{logged_in_user.email}}</br>
-                        <strong>Last Password Change:</strong> MM/DD/YYYY</br>
+                        <strong>Followers: </strong> {{num_of_followers}}</br>
+                        <strong>Following:</strong> {{num_of_following}}</br>
                         <strong>Primary Location:</strong> {{logged_in_user.location}}</br>
                     </div> 
                 </div>
                 <div class="col-md-3">
                     <h3 class="text-center"> Personal Info</h3>
-                    <div class="alert alert-info">
-                        <strong>DOB:</strong> MM/DD/YYYY</br>
+                    <div class="alert bg-dark">
                         <strong>Location:</strong> {{logged_in_user.location}}</br>
-                        <strong>Hobby:</strong> Listening to Music</br>
+                        <strong>Hobby:</strong> {{logged_in_user.hobbies}}</br>
                         <strong>Music Genres:</strong> Rock, Pop, Hip Hop ...,</br>
                         <strong>Email:</strong> {{logged_in_user.email}}</br>
+                        <strong>Bio: </strong> {{logged_in_user.bio}} </br>
 
                     </div> 
                 </div>
                 <div class="col-md-3">
-                    <h3 class="text-center"> Events Attended </h3>
-                    <div class="alert alert-warning text-primary">
-                        {% if event_attended %}
-                            {% for e in event_attened%}
-                                <strong>{{e.location}} </strong> {{e.name}}</br>
+                    <h3 class="text-center"> Events </h3>
+                    <div class="alert bg-dark text-primary">
+                        <h6 align="center">Hosting</h6>
+                        {% if events_hosting %}
+                            {% for e in events_hosting %}
+                                <strong> {{e.location}} :</strong> {{e.name}}</br>
+                            {% endfor %}
+                        {% else %}
+                            <strong> No events hosting</strong>
+                        {% endif %}
+                        <h6 align="center">Attending</h6>
+                        {% if events_attending %}
+                            {% for e in events_attending %}
+                                <strong> {{e.location}} :</strong> {{e.name}}</br>
+                            {% endfor %}
+                        {% else %}
+                            <strong> No events attending</strong>
+                        {% endif %}
+                        <h6 align="center">Attended</h6>
+                        {% if events_attended %}
+                            {% for e in events_attended %}
+                                <strong> {{e.location}} :</strong> {{e.name}}</br>
                             {% endfor %}
                         {% else %}
                             <strong> No events attended</strong>

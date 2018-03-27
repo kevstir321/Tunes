@@ -3,6 +3,24 @@
 {% block content %}
 {% load static %}
 
+<style>
+.row {
+    padding-left: 215px;
+}
+
+#searchbar {
+    padding-left:275px;
+    padding-bottom: 25px;
+}
+
+#info {
+    padding-top: 25px;
+    }
+
+.thumbnail {
+    padding-top: 25px;
+    }
+</style>
 
 
 <div class="container">
@@ -25,16 +43,16 @@
                 <img src="{{ u.profile_picture.url }}" class="rounded-circle" alt="{{ u.name }}">
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4" id=info>
             <h6><i class="now-ui-icons users_single-02"></i><a href="{{ u.get_absolute_url }}">{{ u.name }}</a></h6>
             <h6>Listening to: {{ u.current_song }}</h6>
             <h6>Anthem: {{ u.anthem }}</h6>
             <h6>Tuning in from: {{ u.location }}</h6>
             <button class="btn btn-primary btn-round">Unfollow</button>
         </div>
-        <div class="col-md-4">
-            {{ song.embed_code }} 
-            {{ song.embed_code }}
+        <div class="col-md-3">
+            <iframe src="https://open.spotify.com/embed/track/5cXg9IQS34FzLVdHhp7hu7" width="300" height="100" frameborder="0" allowtransparency="true"></iframe>  
+            <iframe src="https://open.spotify.com/embed/track/4Km5HrUvYTaSUfiSGPJeQR" width="300" height="100" frameborder="0" allowtransparency="true"></iframe>
         </div>   
     </div>
     <hr> 

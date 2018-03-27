@@ -27,7 +27,6 @@
         </div>
         <div class="col-md-4">
             <h6><i class="now-ui-icons users_single-02"></i><a href="{{ u.get_absolute_url }}">{{ u.name }}</a></h6>
-            <h6>Followers: {{ u.followers }}</h6>
             <h6>Listening to: {{ u.current_song }}</h6>
             <h6>Anthem: {{ u.anthem }}</h6>
             <h6>Tuning in from: {{ u.location }}</h6>
@@ -38,11 +37,12 @@
             {{ song.embed_code }}
         </div>   
     </div>
+    <hr> 
     {% endfor %}
 {% else %}
 <p>No Matched Users.</p> 
 {% endif %}
-<hr>   
+  
 </div>
 
 {% endblock %}

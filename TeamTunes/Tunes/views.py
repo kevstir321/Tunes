@@ -93,7 +93,7 @@ def maps(request):
 
 def my_profile(request):
     logged_in_user = User.objects.get(name = "Tim Richards")
-    background_picture = Event.objects.get(name = "Boston Calling Music Festival")
+    background_picture = Album.objects.get(name = "Machine Head")
     num_of_events = logged_in_user.events_attended.all().count() 
     events_attended = [] 
     num = 0 
@@ -124,19 +124,79 @@ def my_profile(request):
     num_of_followers = logged_in_user.followers.all().count() 
     num_of_following = logged_in_user.following.all().count() 
 
+    rot = logged_in_user.rotation.all()
+    rotate = [] 
+    for i in rot:
+        rotate.append(i)
+
+    genres = logged_in_user.favorite_genres.all()
+    favorite_genres = [] 
+    for i in genres:
+        favorite_genres.append(i)
+
+    songs = logged_in_user.favorite_songs.all()
+    favorite_songs = [] 
+    for i in songs: 
+        favorite_songs.append(i) 
+
     return render(
         request,
         'my_profile.html',
-        context={"logged_in_user": logged_in_user, "background_picture": background_picture, "events_attended": events_attended, "num_of_following": num_of_following, "num_of_followers": num_of_followers, "events_attending": events_attending, "events_hosting": events_hosting}
+        context={"logged_in_user": logged_in_user, "background_picture": background_picture, 
+        "events_attended": events_attended, "num_of_following": num_of_following, 
+        "num_of_followers": num_of_followers, "events_attending": events_attending, "events_hosting": events_hosting, 
+        "rotate": rotate, "favorite_genres":favorite_genres, "favorite_songs": favorite_songs}
         )
 
 def settings(request):
     logged_in_user = User.objects.get(name = "Tim Richards")
-    background_picture = Event.objects.get(name = "Boston Calling Music Festival")
+    background_picture = Album.objects.get(name = "Machine Head")
+    num_of_followers = logged_in_user.followers.all().count() 
+    num_of_following = logged_in_user.following.all().count() 
+    rot = logged_in_user.rotation.all()
+    rotate = [] 
+    for i in rot:
+        rotate.append(i)
+
+    num_of_events = logged_in_user.events_attended.all().count() 
+    events_attended = [] 
+    num = 0 
+    for e_attended in logged_in_user.events_attended.all():
+        if num > num_of_events - 1:
+            break
+        events_attended.append(e_attended)
+        num += 1 
+
+    num_of_events_attending = logged_in_user.events_attending.all().count() 
+    num1 = 0 
+    events_attending = [] 
+    for e in logged_in_user.events_attending.all():
+        if num1 > num_of_events_attending - 1: 
+            break 
+        num1 += 1 
+        events_attending.append(e)
+
+    num_of_events_hosting = logged_in_user.events_hosting.all().count() 
+    num2 = 0 
+    events_hosting = [] 
+    for e1 in logged_in_user.events_hosting.all():
+        if num2 > num_of_events_hosting:
+            break 
+        num2 += 1 
+        events_hosting.append(e1)
+
+    songs = logged_in_user.favorite_songs.all()
+    favorite_songs = [] 
+    for i in songs: 
+        favorite_songs.append(i) 
+
     return render(
         request,
         'settings.html',
-        context={}
+        context={"logged_in_user":logged_in_user, "background_picture": background_picture,
+        "num_of_following": num_of_following, "num_of_followers": num_of_followers, "rotate": rotate,
+        "events_attending": events_attending, "events_hosting": events_hosting, 
+        "favorite_songs": favorite_songs,"events_attended": events_attended}
         )
 
 def people(request):

@@ -26,31 +26,34 @@ div.scrollmenu a:hover {
     <!-- End Navbar -->
     <div class="wrapper">
         <div class="page-header page-header-small">
-            <div class="page-header-image " data-parallax="true" style="background-image: url('assets/images/guitar-background.jpg');"></div>
+            <div class="page-header-image " data-parallax="true" style="background-image: url('{{background_picture.art.url}}');"></div>
         </div>
         <!-- edit start -->
-        <div class="container-fluid">
+        <div class="container-fluid bg-light">
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
-                    <img src="assets/images/tim-richards.jpg" class="rounded-circle img-thumbnail" alt="Tim Richards" width="284" height="226">
+                    <img src="{{logged_in_user.profile_picture.url}}" class="rounded-circle img-thumbnail" alt="Tim Richards" width="284" height="226">
                     <button type="button" class="btn btn-primary btn-sm">Change Picture</button>
                 </div>
                 <div class="col-md-2">
-                    <h2></h2>
-                    <h3><i class="now-ui-icons users_single-02"></i> Tim Richards</h3>
-                    <h6>Anthem: Bad and Boujee</h6>
-                    <h6>Tuning in from: Amherst, MA<h6/>
+                     <h2></h2>
+                    <h3><i class="now-ui-icons users_single-02"></i> {{logged_in_user.name}}</h3>
+                    <a><strong> Anthem: </strong> &nbsp &nbsp {{logged_in_user.anthem}}</a></br>
+                    <a><strong> From: </strong> &nbsp &nbsp {{logged_in_user.location}}</a></br>
+                    <a> <strong> Followers:</strong>  &nbsp &nbsp {{num_of_followers}}</a></br>
+                    <a> <strong> Following:</strong>  &nbsp &nbsp {{num_of_following}}</a></br>
                 </div>
                 <div class = "col-md-7">
                     <h5 class="text-center">My Favorites</h6>
                     <div class="scrollmenu">
-                        <img src="assets/images/blond.jpg" alt="Blond" width =23%>
-                        <img src="assets/images/brockhampton.jpg" alt="Brockhampton" width =23%>
-                        <img src="assets/images/November.jpg" alt="November" width =23%>
-                        <img src="assets/images/ctrl.jpg" alt=CTRL width= 23%>
-                        <img src="assets/images/currents.jpg" alt=currents width= 23%>
-                        <img src="assets/images/TLOP.jpg" alt=TLOP width= 23%>
+                        {% if rotate %}
+                            {% for picture in rotate %}
+                                <img src="{{picture.art.url}}" alt="Blond" width =23%>
+                            {% endfor %}
+                        {% else %}
+                            <p>No picture to rotate</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -84,13 +87,7 @@ div.scrollmenu a:hover {
                 </div>
                 <div class="col-md-3">
                     <h3 class="text-center"> Personal Info</h3>
-                    <form>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="now-ui-icons business_badge"></i></span>
-                            <input id="msg" type="DOB" class="form-control" name="msg" placeholder="Birth Date">
-                            <button type="button" class="btn btn-primary ">Change Date</button>
-                        </div>
-                        
+                    <form>   
                         <div class="input-group">
                             <span class="input-group-addon"><i class="now-ui-icons location_pin"></i></span>
                             <input id="msg" type="" class="form-control" name="msg" placeholder="Current Location">
@@ -102,21 +99,52 @@ div.scrollmenu a:hover {
                             <input id="msg" type="" class="form-control" name="msg" placeholder="Music genres">
                             <button type="button" class="btn btn-primary ">Change Genres</button>
                         </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="now-ui-icons ui-1_email-85"></i></span>
+                            <input id="msg" type="" class="form-control" name="msg" placeholder="Music genres">
+                            <button type="button" class="btn btn-primary ">Change Email</button>
+                        </div>
                          
                         <div class="input-group">
                             <span class="input-group-addon"><i class="now-ui-icons tech_controller-modern"></i></span>
                             <input id="msg" type="" class="form-control" name="msg" placeholder="Hobby">
                             <button type="button" class="btn btn-primary ">Change Hobby</button>
-                        </div>        
+                        </div> 
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="now-ui-icons tech_controller-modern"></i></span>
+                            <input id="msg" type="" class="form-control" name="msg" placeholder="Hobby">
+                            <button type="button" class="btn btn-primary ">Change Bio</button>
+                        </div>         
                     </form>
                 </div>
                 <div class="col-md-3">
-                    <h3 class="text-center"> Activities </h3>
-                    <div class="alert alert-warning text-primary">
-                        <strong>Amherst, MA: </strong> Rock Music Concert</br>
-                        <strong>Boston, MA:</strong> Bon Jovi's Concert</br>
-                        <strong>Burlington, MA</strong> Hip Hop Night</br>
-                    </div> 
+                    <h3 class="text-center"> Events </h3>
+                    <div class="bg-light" color = "white">
+                        <h6 align="center">Hosting</h6>
+                        {% if events_hosting %}
+                            {% for e in events_hosting %}
+                                <strong> {{e.location}} :</strong> {{e.name}}</br>
+                            {% endfor %}
+                        {% else %}
+                            <strong> No events hosting</strong>
+                        {% endif %}
+                        <h6 align="center">Attending</h6>
+                        {% if events_attending %}
+                            {% for e in events_attending %}
+                                <strong> {{e.location}} :</strong> {{e.name}}</br>
+                            {% endfor %}
+                        {% else %}
+                            <strong> No events attending</strong>
+                        {% endif %}
+                        <h6 align="center">Attended</h6>
+                        {% if events_attended %}
+                            {% for e in events_attended %}
+                                <strong> {{e.location}} :</strong> {{e.name}}</br>
+                            {% endfor %}
+                        {% else %}
+                            <strong> No events attended</strong>
+                        {% endif %}
+                    </div>  
                     <form>
                         <div class="input-group">
                                 <span class="input-group-addon"><i class="now-ui-icons business_bank"></i></span>
@@ -126,18 +154,22 @@ div.scrollmenu a:hover {
                     <button type="button" class="btn btn-primary ">Add Event</button>
                 </div>
                 <div class="col-md-3">
-                    <h3 class="text-center"> Miscellaneous </h3>
-                    <div class="alert alert-danger">
-                        <string>Something</strong> related to the user will be written here. </br>
-                            bla bla bla </br> bla bla bla bla bla bla
+                    <h3 class="text-center"> Songs </h3>
+                    <div class="alert bg-dark">
+                        <strong>CURRENT SONG : </strong> &nbsp &nbsp {{logged_in_user.current_song.name}} </br>
+                        <strong>FAVORITE SONGS : </strong></br> &nbsp 
+                        {% for song in favorite_songs %}
+                            {{song.name}}, 
+                        {% endfor %}
+                        </br>
                     </div> 
                     <form>
                         <div class="input-group">
-                                <span class="input-group-addon"><i class="now-ui-icons travel_info"></i></span>
+                                <span class="input-group-addon"><i class="now-ui-icons media-2_note-03"></i></span>
                                 <input id="password" type="password" class="form-control" name="password" placeholder="New Info">
                         </div>
                     </form>
-                    <button type="button" class="btn btn-primary ">Add Info</button>
+                    <button type="button" class="btn btn-primary ">Add Song</button>
                 </div>
             </div>
         </div>

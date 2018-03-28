@@ -23,6 +23,14 @@ div.scrollmenu a:hover {
     margin-top: 100px;
 
 }
+
+.events{
+    font-size: 18px; 
+}
+
+.personal-info{
+    font-size: 18px; 
+}
 </style>
 {% endblock %}
 
@@ -31,7 +39,7 @@ div.scrollmenu a:hover {
     <!-- End Navbar -->
     <div class="wrapper">
         <div class="page-header page-header-small">
-            <div class="page-header-image " data-parallax="true" style="background-image: url('{{background_picture.image.url}}');"></div>
+            <div class="page-header-image " data-parallax="true" style="background-image: url('{{background_picture.art.url}}');"></div>
         </div>
         <!-- edit start -->
         <div class="container-fluid bg-light">
@@ -43,20 +51,21 @@ div.scrollmenu a:hover {
                 <div class="col-md-2">
                     <h2></h2>
                     <h3><i class="now-ui-icons users_single-02"></i> {{logged_in_user.name}}</h3>
-                    <h6>Anthem: {{logged_in_user.anthem}}</h6>
-                    <h6>From: {{logged_in_user.location}}<h6/>
-                    <h6>Followers: {{num_of_followers}}</h6>
-                    <h6>Following: {{num_of_following}}</h6>
+                    <a><strong> Anthem: </strong> &nbsp &nbsp {{logged_in_user.anthem}}</a></br>
+                    <a><strong> From: </strong> &nbsp &nbsp {{logged_in_user.location}}</a></br>
+                    <a> <strong> Followers:</strong>  &nbsp &nbsp {{num_of_followers}}</a></br>
+                    <a> <strong> Following:</strong>  &nbsp &nbsp {{num_of_following}}</a></br>
                 </div>
                 <div class = "col-md-7">
                     <h5 class="text-center">My Favorites</h6>
                     <div class="scrollmenu">
-                        <img src="{{background_picture.image.url}}" alt="Blond" width =23%>
-                        <img src="{{background_picture.image.url}}" alt="Brockhampton" width =23%>
-                        <img src="{{background_picture.image.url}}" alt="November" width =23%>
-                        <img src="{{background_picture.image.url}}" alt=CTRL width= 23%>
-                        <img src="{{background_picture.image.url}}" alt=currents width= 23%>
-                        <img src="{{background_picture.image.url}}" alt=TLOP width= 23%>
+                        {% if rotate %}
+                            {% for picture in rotate %}
+                                <img src="{{picture.art.url}}" alt="Blond" width =23%>
+                            {% endfor %}
+                        {% else %}
+                            <p>No picture to rotate</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -65,24 +74,27 @@ div.scrollmenu a:hover {
             <div class = "row">
                 <div class="col-md-3">
                     <h3 class="text-center"> Account Info</h3>
-                    <div class="alert alert-success text-white">
+                    <div class="alert bg-dark text-white">
                         <strong>Followers: </strong> {{num_of_followers}}</br>
                         <strong>Following:</strong> {{num_of_following}}</br>
                         <strong>Primary Location:</strong> {{logged_in_user.location}}</br>
                     </div> 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 personal-info">
                     <h3 class="text-center"> Personal Info</h3>
                     <div class="alert bg-dark">
-                        <strong>Location:</strong> {{logged_in_user.location}}</br>
-                        <strong>Hobby:</strong> {{logged_in_user.hobbies}}</br>
-                        <strong>Music Genres:</strong> Rock, Pop, Hip Hop ...,</br>
-                        <strong>Email:</strong> {{logged_in_user.email}}</br>
-                        <strong>Bio: </strong> {{logged_in_user.bio}} </br>
-
+                        <strong>LOCATION: </strong> &nbsp &nbsp {{logged_in_user.location}} </br>
+                        <strong>HOBBIES: </strong> &nbsp &nbsp {{logged_in_user.hobbies}}</br>
+                        <strong>GENRES : &nbsp</strong> 
+                        {% for i in favorite_genres %}
+                            {{i.name}},
+                        {% endfor %}
+                        </br>
+                        <strong>Email :</strong> &nbsp &nbsp {{logged_in_user.email}}</br>
+                        <strong>BIO : </strong> </br>{{logged_in_user.bio}} </br>
                     </div> 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 events">
                     <h3 class="text-center"> Events </h3>
                     <div class="alert bg-dark text-primary">
                         <h6 align="center">Hosting</h6>
@@ -112,10 +124,14 @@ div.scrollmenu a:hover {
                     </div> 
                 </div>
                 <div class="col-md-3">
-                    <h3 class="text-center"> Miscellaneous </h3>
-                    <div class="alert alert-danger">
-                        <string>Something</strong> related to the user will be written here. </br>
-                            bla bla bla </br> bla bla bla bla bla bla
+                    <h3 class="text-center"> Songs </h3>
+                    <div class="alert bg-dark">
+                        <strong>CURRENT SONG : </strong> &nbsp &nbsp {{logged_in_user.current_song.name}} </br>
+                        <strong>FAVORITE SONGS : </strong></br> &nbsp 
+                        {% for song in favorite_songs %}
+                            {{song.name}}, 
+                        {% endfor %}
+                        </br>
                     </div> 
                 </div>
             </div>

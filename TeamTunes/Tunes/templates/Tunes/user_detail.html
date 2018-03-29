@@ -72,15 +72,15 @@
                     <div class="scrollmenu">
                         {% for album in user.rotation.all %}
                             <img src={{ album.art.url }} alt={{ album.art.url }} width =23%>
-                        {% endfor %}	
+                        {% endfor %}
                     </div>
             {% else %}
                 <h2 class="text-center">Nothing in rotation yet</h2>
 		    {% endif %}
-        </div>    
+        </div>
 
         <div class="col-md-1">
-        </div> 
+        </div>
 
     </div>
 
@@ -97,15 +97,15 @@
                     <h2 class="text-center">My playlists</h2>
                         <div class="scrollmenu">
                             {% for playlist in user.playlists.all %}
-                
-                            {% endfor %}  
+
+                            {% endfor %}
                                 <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotifycharts:playlist:37i9dQZEVXbKuaTI1Z1Afx" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
                                 <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DX0XUsuxWHRQd" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
                                 <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcBWIGoYBM5M" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
                                 <iframe src="https://open.spotify.com/embed?uri=spotify:user:129620582:playlist:0FThqYz4rxjsKJZDsYNfQP" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
                         </div>
                 {% endif %}
-        </div> 
+        </div>
 
         <div class="col-md-1">
         </div>
@@ -122,7 +122,7 @@
         <div class="col-md-10">
             <h1></h1>
             <h3 class="text-center">Bio </h1>
-            <p class ="text-center">{{ user.bio }}            
+            <p class ="text-center">{{ user.bio }}
         </div>
 
         <div class="col-md-1">
@@ -145,7 +145,7 @@
                     {% for event in user.events_attending.all %}
                         <a href="{{ event.get_absolute_url }}" class="list-group-item">
                         <h4 class="list-group-item-heading">{{ user.name }} is going to {{ event.name }}</h4>
-                        <p class="list-group-item-text">Location: 
+                        <p class="list-group-item-text">Location:
                         {{ event.location }}</p>
                         </a>
                     {% endfor %}
@@ -160,30 +160,16 @@
 
 
     <style>
-        
+
         .list-group{
  position: relative;
   display: block;
   padding: 10px 15px;
   margin-bottom: -1px;
-  background-color: #fff;
+  background-color: #fff;}
 
     </style>
 
-
-
-script src="./assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-<script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-<script src="./assets/js/plugins/bootstrap-switch.js"></script>
-<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-<script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
-<!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
-<script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
-<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-<script src="./assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
-</html>
 
 
 {% endblock %}

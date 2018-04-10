@@ -56,7 +56,7 @@ ROOT_URLCONF = 'TeamTunes.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['./templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,3 +133,6 @@ LEAFLET_CONFIG = {
 'MIN_ZOOM': 3,
 'MAX_ZOOM': 18,
 }
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'

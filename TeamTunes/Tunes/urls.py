@@ -12,3 +12,5 @@ urlpatterns = [
     path('my-profile/settings', views.settings, name = "settings"),
     path('people.html', views.people, name='people'),
 ]
+
+

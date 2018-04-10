@@ -1,10 +1,12 @@
 from django.shortcuts import render
 
 # Create your views here.
-from .models import Event
+from .models import User, Event, Song, Album, Genre, Artist, Location
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from random import randint
 
-from .models import User, Event, Song, Album, Genre, Artist, Location
 
 def index(request):
     """

@@ -18,11 +18,11 @@
                         {% if user %}
                             {% for u in user %}
 
-                                <a href="{{ u.get_absolute_url }}" class="list-group-item">
-        						<img src="{{ u.profile_picture.url }}" class="rounded-circle" alt="{{ u.name }}">
+                                <a href="{{ u.profile.get_absolute_url }}" class="list-group-item">
+        						<img src="{{ u.profile.profile_picture.url }}" class="rounded-circle" alt="{{ u.profile.name }}">
         						<div class="list-text">
-        						<h5 class="list-group-item-heading text-primary text-left">{{ u.name }}</h5>
-        						<p class="list-group-item-text text-muted text-left">{{ u.anthem }}</p>
+        						<h5 class="list-group-item-heading text-primary text-left">{{ u.profile.name }}</h5>
+        						<p class="list-group-item-text text-muted text-left">{{ u.profile.anthem }}</p>
         						</div>
         						</a>
 
@@ -77,7 +77,7 @@
               function map_init_basic (map, options) {
                var marker = null;
                 {% for u in user %}
-                    marker = new L.marker([{{u.latitude}}, {{u.longitude}}])
+                    marker = new L.marker([{{u.profile.latitude}}, {{u.profile.longitude}}])
                     .bindPopup("<a href="+"{{ u.get_absolute_url }}"+">"+"<b>"+"{{u.name}}"+"</b>"+"</a><br>"+"Listening to: "+"{{u.current_song}}"+"<br>")
                     .addTo(map);
                 {% endfor %}

@@ -41,15 +41,15 @@
 
         <div class="col-md-2">
             <div alginclass="thumbnail">
-                <img src="{{ user.profile_picture.url }}" class="rounded-circle" alt="Tim Richards">
+                <img src="{{ profile.profile_picture.url }}" class="rounded-circle" alt="{{ profile.name }}">
             </div>
         </div>
 
         <div class="col-md-5"?>
             <h2></h2>
-            <h3 align="left"><i class="now-ui-icons users_single-02"></i> "{{ user.name }}"</h3>
-            <h6 align="left">Anthem: {{ user.anthem }}</h6>
-            <h6 align="left">Tuning in from: {{ user.location }}<h6/>
+            <h3 align="left"><i class="now-ui-icons users_single-02"></i> "{{ profile.name }}"</h3>
+            <h6 align="left">Anthem: {{ profile.anthem }}</h6>
+            <h6 align="left">Tuning in from: {{ profile.location }}<h6/>
             <p align="left"><button class="btn btn-primary">Tune in</button></p>
         </div>
 
@@ -67,10 +67,10 @@
         </div>
 
         <div class="col-md-10">
-       	    {% if user.rotation %}
+       	    {% if profile.rotation %}
                 <h2 class="text-center">In rotation</h2>
                     <div class="scrollmenu">
-                        {% for album in user.rotation.all %}
+                        {% for album in profile.rotation.all %}
                             <img src={{ album.art.url }} alt={{ album.art.url }} width =23%>
                         {% endfor %}
                     </div>

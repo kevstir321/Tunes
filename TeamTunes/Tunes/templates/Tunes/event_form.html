@@ -1,0 +1,23 @@
+{% extends "base_page.html" %}
+
+{% block content %}
+
+<div id="eventform">
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit" />
+    
+</form>
+</div>
+
+<style>
+#eventform { ;
+    position: absolute;
+    left: 2%;
+}
+</style>
+
+{% endblock %}

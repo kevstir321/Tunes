@@ -14,3 +14,8 @@ urlpatterns = [
 ]
 
 
+urlpatterns += [  
+    path('event/create/', views.EventCreate.as_view(), name='event_create'),
+    re_path(r'^event/(?P<pk>[-\w]+)/update/$', views.EventUpdate.as_view(), name='event_update'),
+    re_path(r'^event/(?P<pk>[-\w]+)/delete/$', views.EventDelete.as_view(), name='event_delete'),
+]

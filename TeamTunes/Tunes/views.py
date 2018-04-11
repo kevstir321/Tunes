@@ -233,4 +233,18 @@ def people(request):
     'people.html',
     context={"user": users, "song": songs}
     )
+    
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+
+class EventCreate(CreateView):
+    model = Event
+    fields = '__all__'
+
+class EventUpdate(UpdateView):
+    model = Event
+    fields = '__all__'
+class EventDelete(DeleteView):
+    model = Event
+    success_url = reverse_lazy('')
 

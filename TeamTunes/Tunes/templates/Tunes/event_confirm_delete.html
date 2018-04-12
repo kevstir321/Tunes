@@ -1,0 +1,27 @@
+{% extends "base_page.html" %}
+
+{% block content %}
+
+<div id="stuff">
+
+<h1>Delete Event</h1>
+
+<p>Are you sure you want to delete the event: {{ event }}?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" action="" value="Yes, delete." />
+</form>
+</div>
+
+<style>
+#stuff { 
+    top: 20%;
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+</style>
+
+{% endblock %}

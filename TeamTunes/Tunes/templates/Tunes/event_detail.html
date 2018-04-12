@@ -52,6 +52,31 @@
                         <p>No Users :(</p>
                         {% endif %}
                     </div>
+                    
+                    <div style="float: left; padding-top: 20%">
+                        {% if perms.Tunes.add_event %}
+                            <div>
+                                <a href="{% url 'event_create'%}">
+                                    <button class="btn btn-default">Add New Event</button>
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if perms.Tunes.change_event %}
+                            <div>
+                                <a href="{% url 'event_update' event.id%}">
+                                    <button class="btn btn-default">Edit Event</button>
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if perms.Tunes.delete_event %}
+                            <div>
+                                <a href="{% url 'event_delete' event.id%}">
+                                    <button class="btn btn-default">Remove Event</button>
+                                </a>
+                            </div>
+                        {% endif %}
+                    
+                    </div>
             </div>
             <div class="col-md-6" id=maininfo>
                 <h1 class="list-group-item-heading text-primary text-center" id="eventname">{{ event.name }}</h1>

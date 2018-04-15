@@ -68,6 +68,8 @@ def maps(request):
     num = 0
     users = []
     userhold = User.objects.order_by('?')
+    curr_user = request.user
+    follow = curr_user.profile.followers.all()
 
     for user in userhold:
         if num > num_users-1:

@@ -11,11 +11,12 @@ urlpatterns = [
     path('my-profile', views.my_profile, name = "my_profile"),
     path('my-profile/settings', views.settings, name = "settings"),
     path('people.html', views.people, name='people'),
-    path('profile.html', views.update_profile, name='update_profile'),
 ]
 
 
 urlpatterns += [
+    re_path(r'^profile/create/', views.create_profile, name='create-profile'),
+    re_path(r'^profile/(?P<pk>[-\w]+)/update/', views.update_profile, name='update-profile'),
     path('event/create/', views.EventCreate.as_view(), name='event_create'),
     re_path(r'^event/(?P<pk>[-\w]+)/update/$', views.EventUpdate.as_view(), name='event_update'),
     re_path(r'^event/(?P<pk>[-\w]+)/delete/$', views.EventDelete.as_view(), name='event_delete'),

@@ -51,6 +51,11 @@
             <h6 align="left">Anthem: {{ profile.anthem }}</h6>
             <h6 align="left">Tuning in from: {{ profile.location }}<h6/>
             <p align="left"><button class="btn btn-primary">Tune in</button></p>
+            <div>
+                <a href="{% url 'update-profile' profile.id%}">
+                    <button class="btn btn-default">Edit Profile</button>
+                </a>
+            </div>
         </div>
 
         <div class="col-md-3">
@@ -93,10 +98,10 @@
 
         <div class="col-md-10">
             <h1></h1>
-                {% if user.playlists %}
+                {% if profile.playlists %}
                     <h2 class="text-center">My playlists</h2>
                         <div class="scrollmenu">
-                            {% for playlist in user.playlists.all %}
+                            {% for playlist in profile.playlists.all %}
 
                             {% endfor %}
                                 <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotifycharts:playlist:37i9dQZEVXbKuaTI1Z1Afx" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
@@ -122,7 +127,7 @@
         <div class="col-md-10">
             <h1></h1>
             <h3 class="text-center">Bio </h1>
-            <p class ="text-center">{{ user.bio }}
+            <p class ="text-center">{{ profile.bio }}
         </div>
 
         <div class="col-md-1">
@@ -142,9 +147,9 @@
             <h1></h1>
             <h3 class="text-center">Events </h1>
                 <div class="list-group">
-                    {% for event in user.events_attending.all %}
+                    {% for event in profile.events_attending.all %}
                         <a href="{{ event.get_absolute_url }}" class="list-group-item">
-                        <h4 class="list-group-item-heading">{{ user.name }} is going to {{ event.name }}</h4>
+                        <h4 class="list-group-item-heading">{{ profile.name }} is going to {{ event.name }}</h4>
                         <p class="list-group-item-text">Location:
                         {{ event.location }}</p>
                         </a>

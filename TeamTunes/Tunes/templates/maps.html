@@ -13,7 +13,7 @@
 
             .leaflet-container {
               height: 700px;
-              ß}
+              }
             </style>
             <body>
             {% if user %}
@@ -22,7 +22,7 @@
                var marker = null;
                 {% for u in user %}
                     marker = new L.marker([{{u.profile.latitude}}, {{u.profile.longitude}}])
-                    .bindPopup("<a href="+"{{ u.get_absolute_url }}"+">"+"<b>"+"{{u.name}}"+"</b>"+"</a><br>"+"Listening to: "+"{{u.current_song}}"+"<br>")
+                    .bindPopup("<a href="+"{{ u.profile.get_absolute_url }}"+">"+"<b>"+"{{u.profile.user}}"+"</b>"+"</a><br>"+"Listening to: "+"{{u.profile.current_song}}"+"<br>")
                     .addTo(map);
                 {% endfor %}
                 {% for e in event %}

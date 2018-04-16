@@ -4,7 +4,7 @@
 {% load static %}
 {% load staticfiles %}
 
-{% block title %}<title>{{ user.name }}</title>{% endblock %}
+{% block title %}<title>{{ profile.name }}</title>{% endblock %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,6 +51,11 @@
             <h6 align="left">Anthem: {{ profile.anthem }}</h6>
             <h6 align="left">Tuning in from: {{ profile.location }}<h6/>
             <p align="left"><button class="btn btn-primary">Tune in</button></p>
+            {% if request.user.is_authenticated  %}
+                
+            {% else %}
+                <p><a href="{% url 'login' %}?next={{request.path}}" class="nav-link">Login</a> To tune in</p>
+            {% endif %}
         </div>
 
         <div class="col-md-3">

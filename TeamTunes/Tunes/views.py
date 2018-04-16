@@ -57,6 +57,10 @@ class EventDetailView(generic.DetailView):
 class UserDetailView(generic.DetailView):
     model = Profile
 
+    def get_context_data(self, **kwargs):
+        context = super(UserDetailView, self).get_context_data(**kwargs)
+        return context
+
 
 
 

@@ -8,9 +8,9 @@ urlpatterns = [
     re_path(r'^user/(?P<pk>[-\w]+)$', views.UserDetailView.as_view(), name='user-detail'),
     re_path(r'^event/(?P<pk>[-\w]+)$', views.EventDetailView.as_view(), name='event-detail'),
     path('maps.html', views.maps, name='maps'),
-    path('my-profile', views.my_profile, name = "my_profile"),
+    path('my_profile.html', views.my_profile, name = "my_profile"),
+    path('settings.html', views.update_profile, name = "settings"),
     path('people.html', views.people, name='people'),
-    path('profile.html', views.update_profile, name='update_profile'),
 ]
 
 

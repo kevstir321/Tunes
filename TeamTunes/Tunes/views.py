@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
 # Create your views here.
 from .models import Profile, Event, Song, Album, Genre, Artist, Location
@@ -72,8 +73,10 @@ def maps(request):
     follow = curr_user.profile.followers.all()
 
     for user in userhold:
-        if num > num_users-1:
+        if num >= 6 or num > num_users-1:
             break
+        if user.username == 'compsci326':
+            continue
         users.append(user)
         num = num + 1
 
@@ -168,34 +171,35 @@ def update_profile(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        profile_picture_form = Profile_Picture_Form(request.POST, instance=request.user.profile) 
+        profile_picture_form = Profile_Picture_Form(request.POST, instance=request.user.profile)
         profile_rotation = RotationForm(request.POST, instance=request.user.profile)
         profile_favorite_songs = Favorite_Songs_Form(request.POST, instance=request.user.profile)
         profile_favorite_genres = Favorite_Genres_Form(request.POST, instance=request.user.profile)
-        profile_current_song = Current_Song_Form(request.POST, instance=request.user.profile) 
-        
-        if (profile_picture_form.is_valid() and user_form.is_valid() and 
-        profile_form.is_valid() and profile_rotation.is_valid() and 
+        profile_current_song = Current_Song_Form(request.POST, instance=request.user.profile)
+
+        if (profile_picture_form.is_valid() and user_form.is_valid() and
+        profile_form.is_valid() and profile_rotation.is_valid() and
         profile_favorite_songs.is_valid() and profile_favorite_genres.is_valid() and profile_current_song.is_valid()):
             user_form.save()
             profile_form.save()
-            profile_picture_form.save() 
-            profile_favorite_songs.save() 
-            profile_favorite_genres.save() 
+            profile_picture_form.save()
+            profile_favorite_songs.save()
+            profile_favorite_genres.save()
             profile_current_song.save()
-            profile_rotation.save() 
-            messages.success(request, _('Your profile was successfully updated!'))
+            profile_rotation.save()
+            messages.success(request, ('Your profile was successfully updated!'))
             return redirect('settings:profile')
         else:
-            messages.error(request, _('Please correct the error below.'))
+            pass
+            messages.error(request, ('Please correct the error below.'))
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
         profile_picture_form = Profile_Picture_Form(instance=request.user.profile)
         profile_favorite_songs = Favorite_Songs_Form(instance=request.user.profile)
-        profile_favorite_genres = Favorite_Genres_Form(instance=request.user.profile) 
-        profile_current_song = Current_Song_Form(instance=request.user.profile) 
-        profile_rotation = RotationForm(instance=request.user.profile) 
+        profile_favorite_genres = Favorite_Genres_Form(instance=request.user.profile)
+        profile_current_song = Current_Song_Form(instance=request.user.profile)
+        profile_rotation = RotationForm(instance=request.user.profile)
 
     return render(request, 'settings.html', {
         'user_form': user_form,
@@ -211,12 +215,6 @@ def update_profile(request):
         'profile_current_song': profile_current_song
     })
 
-def create_profile(request):
-    return render(
-            request,
-            'create_profile.html',
-            )
-
 def people(request):
 
     #Get list of random users
@@ -228,6 +226,8 @@ def people(request):
     for user in userhold:
         if num > num_users-1:
             break
+        if user.username == 'compsci326':
+            continue
         users.append(user)
         num = num + 1
 
@@ -264,3 +264,31 @@ class EventDelete(DeleteView):
     model = Event
     success_url = reverse_lazy('')
 
+from .forms import UserForm, ProfileForm
+from django.db import transaction
+
+#@login_required
+@transaction.atomic
+def create_profile(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+        profile_form = ProfileForm(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            user.refresh_from_db()
+            user.set_password(user_form.cleaned_data.get('password'))
+            user.save()
+            profile_form = ProfileForm(request.POST, instance=user.profile)
+            profile_form.full_clean()
+            profile_form.save()
+            return redirect('login')
+        else:
+            pass
+            #messages.error(request, _('Please correct the error below.'))
+    else:
+        user_form = UserForm(request.POST)
+        profile_form = ProfileForm(request.POST)
+    return render(request, 'create_profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 import uuid
+from datetime import datetime
 
 # Create your models here.
 class Profile(models.Model):
@@ -60,14 +61,14 @@ class Event(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this event")
 	name = models.CharField(max_length=100)
 	location = models.ForeignKey('Location', blank = True, null = True, on_delete=models.SET_NULL, related_name = "event_location")
-	start_time = models.DateTimeField(null=True, blank=True)
-	end_time = models.DateTimeField(null=True, blank=True)
+	start_time = models.DateTimeField('Start Time', default=datetime.now, help_text="(yyyy-mm-dd hh:mm:ss)")
+	end_time = models.DateTimeField('End Time', default=datetime.now, help_text="(yyyy-mm-dd hh:mm:ss)")
 	description = models.TextField()
 	image = models.ImageField(upload_to = 'images/events/', default = 'images/default.png', blank = True, null = True)
 	host = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name = "event_host")
 	people = models.ManyToManyField('Profile', related_name = "people_attending")
 	other_events = models.ManyToManyField('Event', related_name = "other_events_occuring")
-	web_link = models.URLField(max_length=250, blank = True, null = True)
+	web_link = models.URLField('Web Link', max_length=250, blank = True, null = True, help_text="(http(s)://...)")
 	venue = models.CharField(max_length=100, blank = True, null = True)
 	latitude = models.DecimalField(max_digits=9, decimal_places=6, blank = True, null = True)
 	longitude = models.DecimalField(max_digits=9, decimal_places=6, blank = True, null = True)

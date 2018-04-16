@@ -57,6 +57,10 @@ class EventDetailView(generic.DetailView):
 class UserDetailView(generic.DetailView):
     model = Profile
 
+    def get_context_data(self, **kwargs):
+        context = super(UserDetailView, self).get_context_data(**kwargs)
+        return context
+
 
 
 
@@ -262,7 +266,7 @@ class EventUpdate(UpdateView):
     fields = '__all__'
 class EventDelete(DeleteView):
     model = Event
-    success_url = reverse_lazy('')
+    success_url = reverse_lazy('index')
 
 from .forms import UserForm, ProfileForm
 from django.db import transaction

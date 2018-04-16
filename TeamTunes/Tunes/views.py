@@ -279,29 +279,3 @@ def create_profile(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
-
-from django.contrib.auth.decorators import login_required
-
-@login_required
-@transaction.atomic
-def update_profile(request, pk):
-    if request.method == 'POST':
-        user_form = UserForm(request.POST)
-        profile_form = ProfileForm(request.POST)
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
-            user.refresh_from_db()
-            profile_form = ProfileForm(request.POST, instance=user.profile)
-            profile_form.full_clean()
-            profile_form.save()
-            return redirect('login')
-        else:
-            pass
-            #messages.error(request, _('Please correct the error below.'))
-    else:
-            user_form = UserForm(instance=request.user)
-            profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'profile.html', {
-        'user_form': user_form,
-        'profile_form': profile_form
-    })

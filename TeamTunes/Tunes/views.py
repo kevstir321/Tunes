@@ -103,8 +103,6 @@ def my_profile(request):
     logged_in_user = request.user.profile
     background_picture = Album.objects.get(name = "Soul")
     num_of_events = logged_in_user.events_attended.all().count()
-    if num_of_events == 0:
-
     events_attended = []
     num = 0
     for e_attended in logged_in_user.events_attended.all():

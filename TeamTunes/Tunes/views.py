@@ -5,7 +5,7 @@ from .models import Profile, Event, Song, Album, Genre, Artist, Location
 from django.contrib.auth.models import User
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib.auth.decorators import login_required
 from random import randint
 
 
@@ -96,10 +96,13 @@ def maps(request):
     context={"user": users, "event": events}
     )
 
+@login_required
 def my_profile(request):
-    logged_in_user = User.objects.get(name = "Tim Richards")
-    background_picture = Album.objects.get(name = "Machine Head")
+    logged_in_user = request.user.profile
+    background_picture = Album.objects.get(name = "Soul")
     num_of_events = logged_in_user.events_attended.all().count()
+    if num_of_events == 0:
+
     events_attended = []
     num = 0
     for e_attended in logged_in_user.events_attended.all():

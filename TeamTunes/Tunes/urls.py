@@ -9,7 +9,6 @@ urlpatterns = [
     re_path(r'^event/(?P<pk>[-\w]+)$', views.EventDetailView.as_view(), name='event-detail'),
     path('maps.html', views.maps, name='maps'),
     path('my-profile', views.my_profile, name = "my_profile"),
-    path('my-profile/settings', views.settings, name = "settings"),
     path('people.html', views.people, name='people'),
     path('profile.html', views.update_profile, name='update_profile'),
 ]

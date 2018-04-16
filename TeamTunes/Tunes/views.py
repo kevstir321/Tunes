@@ -173,56 +173,119 @@ def update_profile(request):
     num_of_followers = logged_in_user.followers.all().count()
     num_of_following = logged_in_user.following.all().count()
     background_picture = Album.objects.get(name = "Soul")
+    num_of_events = logged_in_user.events_attended.all().count()
+    events_attended = []
+    num = 0
+    for e_attended in logged_in_user.events_attended.all():
+        if num > num_of_events - 1:
+            break
+        events_attended.append(e_attended)
+        num += 1
+
+    num_of_events_attending = logged_in_user.events_attending.all().count()
+    num1 = 0
+    events_attending = []
+    for e in logged_in_user.events_attending.all():
+        if num1 > num_of_events_attending - 1:
+            break
+        num1 += 1
+        events_attending.append(e)
+
+    num_of_events_hosting = logged_in_user.events_hosting.all().count()
+    num2 = 0
+    events_hosting = []
+    for e1 in logged_in_user.events_hosting.all():
+        if num2 > num_of_events_hosting:
+            break
+        num2 += 1
+        events_hosting.append(e1)
+    
+    rot = logged_in_user.rotation.all()
+    rotate = []
+    for i in rot:
+        rotate.append(i)
+
+    genres = logged_in_user.favorite_genres.all()
+    favorite_genres = []
+    for i in genres:
+        favorite_genres.append(i)
+
+    songs = logged_in_user.favorite_songs.all()
+    favorite_songs = []
+    for i in songs:
+        favorite_songs.append(i)
+    
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        profile_picture_form = Profile_Picture_Form(request.POST, instance=request.user.profile)
-        profile_rotation = RotationForm(request.POST, instance=request.user.profile)
-        profile_favorite_songs = Favorite_Songs_Form(request.POST, instance=request.user.profile)
-        profile_favorite_genres = Favorite_Genres_Form(request.POST, instance=request.user.profile)
-        profile_current_song = Current_Song_Form(request.POST, instance=request.user.profile)
-        """
-        if (profile_picture_form.is_valid() and user_form.is_valid() and
-        profile_form.is_valid() and profile_rotation.is_valid() and
-        profile_favorite_songs.is_valid() and profile_favorite_genres.is_valid() and profile_current_song.is_valid()):
-            user_form.save()
-            profile_form.save()
+        user_form = UserForm(request.POST)
+        profile_form = ProfileForm(request.POST)
+        profile_picture_form = Profile_Picture_Form(request.POST)
+        profile_rotation = RotationForm(request.POST)
+        profile_favorite_songs = Favorite_Songs_Form(request.POST)
+        profile_favorite_genres = Favorite_Genres_Form(request.POST)
+        profile_current_song = Current_Song_Form(request.POST)
+        i = 0 
+        if profile_picture_form.is_valid():
+            profile_picture_form = Profile_Picture_Form(request.POST, instance=request.user.profile)
             profile_picture_form.save()
-            profile_favorite_songs.save()
-            profile_favorite_genres.save()
-            profile_current_song.save()
-            profile_rotation.save()
-            messages.success(request, ('Your profile was successfully updated!'))
-            return redirect('settings:profile')
+            i = 1 
+            #return redirect('settings') 
+        else: 
+            pass 
+        
+        if user_form.is_valid():
+            user = user_form.save()
+            user.refresh_from_db()
+            user.set_password(user_form.cleaned_data.get('password'))
+            user.save()
+            i = 1 
+            #return redirect('settings')
         else:
             pass
-            messages.error(request, ('Please correct the error below.'))
-        """
-        if profile_picture_form.is_valid():
-            profile_picture_form.save()
-            return redirect('settings') 
-        elif user_form.is_valid():
-            user_form.save() 
-            return redirect('settings')
-        elif profile_form.is_valid():
+        
+        if profile_form.is_valid():
+            profile_form = ProfileForm(request.POST, instance=request.user.profile)
             profile_form.full_clean() 
             profile_form.save() 
-            return redirect('settings')
-        elif profile_rotation.is_valid():
+            i = 1 
+            #return redirect('settings')
+        else:
+            pass
+        
+        if profile_rotation.is_valid():
+            profile_rotation = RotationForm(request.POST, instance=request.user.profile)
             profile_rotation.save() 
-            return redirect('settings')
-        elif profile_favorite_songs.is_valid():
+            #return redirect('settings')
+            i = 1 
+        else: 
+            pass 
+
+        if profile_favorite_songs.is_valid():
+            profile_favorite_songs = Favorite_Songs_Form(request.POST, instance=request.user.profile)
             profile_favorite_songs.save() 
-            return redirect('settings')
-        elif profile_favorite_genres.is_valid():
-            profile_favorite_genres.save() 
-            return redirect('settings')
-        elif profile_current_song.is_valid():
-            profile_current_song.save() 
-            return redirect('settings')
+            #return redirect('settings')
+            i = 1 
         else:
             pass 
 
+        if profile_favorite_genres.is_valid():
+            profile_favorite_genres = Favorite_Genres_Form(request.POST, instance=request.user.profile)
+            profile_favorite_genres.save() 
+            i = 1
+            #return redirect('settings')
+        else:
+            pass 
+
+        if profile_current_song.is_valid():
+            profile_current_song = Current_Song_Form(request.POST, instance=request.user.profile)
+            profile_current_song.save() 
+            i = 1
+            #return redirect('settings')
+        else:
+            pass
+
+        if i == 1:
+            return redirect('settings') 
+    
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
@@ -243,7 +306,13 @@ def update_profile(request):
         'profile_rotation': profile_rotation,
         'profile_favorite_songs': profile_favorite_songs,
         'profile_favorite_genres': profile_favorite_genres,
-        'profile_current_song': profile_current_song
+        'profile_current_song': profile_current_song,
+        'events_attended': events_attended,
+        'events_attending': events_attending,
+        'events_hosting': events_hosting,
+        'favorite_genres': favorite_genres,
+        'favorite_songs': favorite_songs,
+        'rotate': rotate
     })
 
 def people(request):

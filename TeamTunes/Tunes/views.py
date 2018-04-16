@@ -262,7 +262,7 @@ class EventUpdate(UpdateView):
     fields = '__all__'
 class EventDelete(DeleteView):
     model = Event
-    success_url = reverse_lazy('')
+    success_url = reverse_lazy('index')
 
 from .forms import UserForm, ProfileForm
 from django.db import transaction

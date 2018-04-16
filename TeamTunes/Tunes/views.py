@@ -164,9 +164,10 @@ def my_profile(request):
         )
 
 from .forms import UserForm, ProfileForm, Profile_Picture_Form, RotationForm, Favorite_Songs_Form, Favorite_Genres_Form, Current_Song_Form
+from django.db import transaction
 
 @login_required
-#@transaction.atomic
+@transaction.atomic
 def update_profile(request):
     logged_in_user = request.user.profile
     num_of_followers = logged_in_user.followers.all().count()
@@ -180,7 +181,7 @@ def update_profile(request):
         profile_favorite_songs = Favorite_Songs_Form(request.POST, instance=request.user.profile)
         profile_favorite_genres = Favorite_Genres_Form(request.POST, instance=request.user.profile)
         profile_current_song = Current_Song_Form(request.POST, instance=request.user.profile)
-
+        """
         if (profile_picture_form.is_valid() and user_form.is_valid() and
         profile_form.is_valid() and profile_rotation.is_valid() and
         profile_favorite_songs.is_valid() and profile_favorite_genres.is_valid() and profile_current_song.is_valid()):
@@ -196,6 +197,32 @@ def update_profile(request):
         else:
             pass
             messages.error(request, ('Please correct the error below.'))
+        """
+        if profile_picture_form.is_valid():
+            profile_picture_form.save()
+            return redirect('settings') 
+        elif user_form.is_valid():
+            user_form.save() 
+            return redirect('settings')
+        elif profile_form.is_valid():
+            profile_form.full_clean() 
+            profile_form.save() 
+            return redirect('settings')
+        elif profile_rotation.is_valid():
+            profile_rotation.save() 
+            return redirect('settings')
+        elif profile_favorite_songs.is_valid():
+            profile_favorite_songs.save() 
+            return redirect('settings')
+        elif profile_favorite_genres.is_valid():
+            profile_favorite_genres.save() 
+            return redirect('settings')
+        elif profile_current_song.is_valid():
+            profile_current_song.save() 
+            return redirect('settings')
+        else:
+            pass 
+
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)

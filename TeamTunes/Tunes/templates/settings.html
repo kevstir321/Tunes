@@ -139,7 +139,9 @@ div.scrollmenu a:hover {
                         </br>
                         </br>
                         <div class="create_event">
-                            <input type="button" class="btn btn-success" value="Create Event" onclick="location.href = {% url 'event_create' %};">
+                            <form action="{% url 'event_create' %}">
+                                <input type="submit" class="btn btn-success" value="Create Event" />
+                            </form> 
                         </div>
                     </div>
                 </div>

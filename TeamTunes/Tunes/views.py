@@ -211,6 +211,12 @@ def update_profile(request):
         'profile_current_song': profile_current_song
     })
 
+def create_profile(request):
+    return render(
+            request,
+            'create_profile.html',
+            )
+
 def people(request):
 
     #Get list of random users

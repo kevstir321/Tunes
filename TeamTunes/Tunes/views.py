@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 
 # Create your views here.
 from .models import Profile, Event, Song, Album, Genre, Artist, Location
@@ -168,34 +169,35 @@ def update_profile(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        profile_picture_form = Profile_Picture_Form(request.POST, instance=request.user.profile) 
+        profile_picture_form = Profile_Picture_Form(request.POST, instance=request.user.profile)
         profile_rotation = RotationForm(request.POST, instance=request.user.profile)
         profile_favorite_songs = Favorite_Songs_Form(request.POST, instance=request.user.profile)
         profile_favorite_genres = Favorite_Genres_Form(request.POST, instance=request.user.profile)
-        profile_current_song = Current_Song_Form(request.POST, instance=request.user.profile) 
-        
-        if (profile_picture_form.is_valid() and user_form.is_valid() and 
-        profile_form.is_valid() and profile_rotation.is_valid() and 
+        profile_current_song = Current_Song_Form(request.POST, instance=request.user.profile)
+
+        if (profile_picture_form.is_valid() and user_form.is_valid() and
+        profile_form.is_valid() and profile_rotation.is_valid() and
         profile_favorite_songs.is_valid() and profile_favorite_genres.is_valid() and profile_current_song.is_valid()):
             user_form.save()
             profile_form.save()
-            profile_picture_form.save() 
-            profile_favorite_songs.save() 
-            profile_favorite_genres.save() 
+            profile_picture_form.save()
+            profile_favorite_songs.save()
+            profile_favorite_genres.save()
             profile_current_song.save()
-            profile_rotation.save() 
-            messages.success(request, _('Your profile was successfully updated!'))
+            profile_rotation.save()
+            messages.success(request, ('Your profile was successfully updated!'))
             return redirect('settings:profile')
         else:
-            messages.error(request, _('Please correct the error below.'))
+            pass
+            messages.error(request, ('Please correct the error below.'))
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
         profile_picture_form = Profile_Picture_Form(instance=request.user.profile)
         profile_favorite_songs = Favorite_Songs_Form(instance=request.user.profile)
-        profile_favorite_genres = Favorite_Genres_Form(instance=request.user.profile) 
-        profile_current_song = Current_Song_Form(instance=request.user.profile) 
-        profile_rotation = RotationForm(instance=request.user.profile) 
+        profile_favorite_genres = Favorite_Genres_Form(instance=request.user.profile)
+        profile_current_song = Current_Song_Form(instance=request.user.profile)
+        profile_rotation = RotationForm(instance=request.user.profile)
 
     return render(request, 'settings.html', {
         'user_form': user_form,
@@ -210,12 +212,6 @@ def update_profile(request):
         'profile_favorite_genres': profile_favorite_genres,
         'profile_current_song': profile_current_song
     })
-
-def create_profile(request):
-    return render(
-            request,
-            'create_profile.html',
-            )
 
 def people(request):
 
@@ -288,7 +284,7 @@ def create_profile(request):
     else:
         user_form = UserForm(request.POST)
         profile_form = ProfileForm(request.POST)
-    return render(request, 'profile.html', {
+    return render(request, 'create_profile.html', {
         'user_form': user_form,
         'profile_form': profile_form
     })

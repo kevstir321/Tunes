@@ -1,7 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head></head>
-    <body>
-        <h2> Here create profile page will be shown</h2>
-    </body>
-</html>
+{% extends "base_page.html" %}
+
+{% block content %}
+
+  <form action='' method='post'>
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    <button type="submit">Save changes</button>
+  </form>
+
+{% endblock %} 

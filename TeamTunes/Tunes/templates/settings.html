@@ -25,11 +25,11 @@ div.scrollmenu a:hover {
 }
 
 .events{
-    font-size: 18px; 
+    font-size: 18px;
 }
 
 .personal-info{
-    font-size: 18px; 
+    font-size: 18px;
 }
 </style>
 {% endblock %}
@@ -46,10 +46,11 @@ div.scrollmenu a:hover {
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
-                    <img src=" {{logged_in_user.profile_picture.url}} "  
+                    <img src=" {{logged_in_user.profile_picture.url}} "
                     class="rounded-circle" alt="Tim Richards" width="284" height="226">
-                    <div class="pic_change bg-dark text-warning">    
+                    <div class="pic_change bg-dark text-warning">
                         <form method="post">
+                            {% csrf_token %}
                             {{ profile_picture_form.as_p }}
                           <button type="submit" class="btn btn-success">Save Picture</button>
                         </form>
@@ -94,7 +95,7 @@ div.scrollmenu a:hover {
                           {{ user_form.as_p }}
                           <button type="submit" class="btn btn-success">Save Changes</button>
                         </form>
-                    </div> 
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <h3 class="text-center"> Profile Info</h3>
@@ -104,7 +105,7 @@ div.scrollmenu a:hover {
                           {{ profile_form.as_p }}
                           <button type="submit" class="btn btn-success">Save Changes</button>
                         </form>
-                    </div> 
+                    </div>
                 </div>
                 <div class="col-md-3 events">
                     <h3 class="text-center"> Events </h3>
@@ -140,16 +141,16 @@ div.scrollmenu a:hover {
                         <div class="create_event">
                             <input type="button" class="btn btn-success" value="Create Event" onclick="location.href = {% url 'event_create' %};">
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <h3 class="text-center"> Songs </h3>
                     <div class="alert bg-dark">
-                        <strong>CURRENT SONG : </strong> &nbsp &nbsp 
+                        <strong>CURRENT SONG : </strong> &nbsp &nbsp
                         {% if logged_in_user.current_song %}
-                            {{logged_in_user.current_song.name}} 
-                        {% else %} 
-                            No song availble 
+                            {{logged_in_user.current_song.name}}
+                        {% else %}
+                            No song availble
                         {% endif %}
                         </br>
                         </br>
@@ -162,11 +163,11 @@ div.scrollmenu a:hover {
                             </form>
                         </div>
                         </br>
-                        
-                        <strong>FAVORITE SONGS : </strong> &nbsp 
+
+                        <strong>FAVORITE SONGS : </strong> &nbsp
                         {% if favorite_songs %}
                             {% for song in favorite_songs %}
-                                {{song.name}}, 
+                                {{song.name}},
                             {% endfor %}
                         {% else %}
                             No favorite song availble
@@ -182,8 +183,8 @@ div.scrollmenu a:hover {
                             </form>
                         </div>
                         </br>
-                        
-                        <strong>FAVORITE GENRES : &nbsp</strong> 
+
+                        <strong>FAVORITE GENRES : &nbsp</strong>
                         {% if favorite_genres %}
                             {% for i in favorite_genres %}
                                 {{i.name}},
@@ -200,15 +201,15 @@ div.scrollmenu a:hover {
                               {{ profile_favorite_genres.as_p }}
                               <button type="submit" class="btn btn-success">Update Genres</button>
                             </form>
-                        </div> 
+                        </div>
                         </br>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
         <footer class="footer">
-            
-        </footer> 
+
+        </footer>
     </div>
 </body>
 {% endblock %}

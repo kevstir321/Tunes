@@ -7,11 +7,10 @@ urlpatterns = [
     path('', views.index, name='index'),
     re_path(r'^user/(?P<pk>[-\w]+)$', views.UserDetailView.as_view(), name='user-detail'),
     re_path(r'^event/(?P<pk>[-\w]+)$', views.EventDetailView.as_view(), name='event-detail'),
-    path('maps.html', views.maps, name='maps'),
-    path('my_profile.html', views.my_profile, name = "my_profile"),
-    path('settings.html', views.update_profile, name = "settings"),
-    path('people.html', views.people, name='people'),
-    path('create_profile.html', views.create_profile, name='update_profile')
+    path('maps', views.maps, name='maps'),
+    path('my_profile', views.my_profile, name = "my_profile"),
+    path('settings', views.update_profile, name = "settings"),
+    path('people', views.people, name='people'),
 ]
 
 

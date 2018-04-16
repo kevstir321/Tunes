@@ -1,6 +1,6 @@
 {% extends "base_page.html" %}
 {% block style %}
-    <style>
+<style>
 div.scrollmenu {
     background-color: #333;
     overflow: auto;
@@ -18,6 +18,19 @@ div.scrollmenu a {
 div.scrollmenu a:hover {
     background-color: #777;
 }
+
+.bottom {
+    margin-top: 100px;
+
+}
+
+.events{
+    font-size: 18px; 
+}
+
+.personal-info{
+    font-size: 18px; 
+}
 </style>
 {% endblock %}
 
@@ -33,14 +46,20 @@ div.scrollmenu a:hover {
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
-                    <img src="{{logged_in_user.profile_picture.url}}" class="rounded-circle img-thumbnail" alt="Tim Richards" width="284" height="226">
-                    <button type="button" class="btn btn-primary btn-sm">Change Picture</button>
+                    <img src=" {{logged_in_user.profile_picture.url}} "  
+                    class="rounded-circle" alt="Tim Richards" width="284" height="226">
+                    <div class="pic_change bg-dark text-warning">    
+                        <form method="post">
+                            {{ profile_picture_form.as_p }}
+                          <button type="submit" class="btn btn-success">Save Picture</button>
+                        </form>
+                    </div>
                 </div>
                 <div class="col-md-2">
-                     <h2></h2>
-                    <h3><i class="now-ui-icons users_single-02"></i> {{logged_in_user.name}}</h3>
-                    <a><strong> Anthem: </strong> &nbsp &nbsp {{logged_in_user.anthem}}</a></br>
-                    <a><strong> From: </strong> &nbsp &nbsp {{logged_in_user.location}}</a></br>
+                    <h2></h2>
+                    <h4><i class="now-ui-icons"></i> <strong> {% if logged_in_user.name %}{{logged_in_user.name}} {% else %} No Profile Name {% endif %} </strong> </h4>
+                    <a><strong> Anthem: </strong> &nbsp &nbsp {% if logged_in_user.anthem %}{{logged_in_user.anthem}} {% else %} No Anthem {% endif %}</a></br>
+                    <a><strong> From: </strong> &nbsp &nbsp {% if logged_in_user.location %}{{logged_in_user.location}} {% else %} No Location Available {% endif %}</a></br>
                     <a> <strong> Followers:</strong>  &nbsp &nbsp {{num_of_followers}}</a></br>
                     <a> <strong> Following:</strong>  &nbsp &nbsp {{num_of_following}}</a></br>
                 </div>
@@ -52,124 +71,138 @@ div.scrollmenu a:hover {
                                 <img src="{{picture.art.url}}" alt="Blond" width =23%>
                             {% endfor %}
                         {% else %}
-                            <p>No picture to rotate</p>
+                        <p><font color="white">No picture to rotate</font></p>
                         {% endif %}
+                    </div>
+                    <div class="rotation_album bg-dark text-warning">
+                        <form method="post">
+                          {% csrf_token %}
+                          {{ profile_rotation.as_p }}
+                          <button type="submit" class="btn btn-success">Update Albums</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-             <div class = "row">
-                <div class="col-sm-10"> </div>
-                <div class="col-sm-2"> 
-                    <button type="button" class="btn btn-primary">Remove Albums</button>
-            </div>
-        </div>
-        <div class="container-fluid">
+        <div class="container-fluid bottom">
             <div class = "row">
                 <div class="col-md-3">
-                    <h3 class="text-center"> Change Password</h3>
-                    <form>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="now-ui-icons ui-1_email-85"></i></span>
-                            <input id="email" type="text" class="form-control" name="email" placeholder="Email">
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="now-ui-icons ui-1_lock-circle-open"></i></span>
-                            <input id="password" type="password" class="form-control" name="password" placeholder="Current Password">
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="now-ui-icons ui-1_lock-circle-open"></i></span>
-                            <input id="password" type="password" class="form-control" name="password" placeholder="New Password">
-                        </div>
-                    </form>
-                    <button type="button" class="btn btn-primary ">Change Password</button>
+                    <h3 class="text-center"> Account Info </h3>
+                    <div class="alert bg-dark text-warning">
+                        <form method="post">
+                          {% csrf_token %}
+                          {{ user_form.as_p }}
+                          <button type="submit" class="btn btn-success">Save Changes</button>
+                        </form>
+                    </div> 
                 </div>
                 <div class="col-md-3">
-                    <h3 class="text-center"> Personal Info</h3>
-                    <form>   
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="now-ui-icons location_pin"></i></span>
-                            <input id="msg" type="" class="form-control" name="msg" placeholder="Current Location">
-                            <button type="button" class="btn btn-primary ">Change Location</button>
-                        </div>
-                         
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="now-ui-icons media-2_note-03"></i></span>
-                            <input id="msg" type="" class="form-control" name="msg" placeholder="Music genres">
-                            <button type="button" class="btn btn-primary ">Change Genres</button>
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="now-ui-icons ui-1_email-85"></i></span>
-                            <input id="msg" type="" class="form-control" name="msg" placeholder="Music genres">
-                            <button type="button" class="btn btn-primary ">Change Email</button>
-                        </div>
-                         
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="now-ui-icons tech_controller-modern"></i></span>
-                            <input id="msg" type="" class="form-control" name="msg" placeholder="Hobby">
-                            <button type="button" class="btn btn-primary ">Change Hobby</button>
-                        </div> 
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="now-ui-icons tech_controller-modern"></i></span>
-                            <input id="msg" type="" class="form-control" name="msg" placeholder="Hobby">
-                            <button type="button" class="btn btn-primary ">Change Bio</button>
-                        </div>         
-                    </form>
+                    <h3 class="text-center"> Profile Info</h3>
+                    <div class="alert bg-dark text-warning">
+                        <form method="post">
+                          {% csrf_token %}
+                          {{ profile_form.as_p }}
+                          <button type="submit" class="btn btn-success">Save Changes</button>
+                        </form>
+                    </div> 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 events">
                     <h3 class="text-center"> Events </h3>
-                    <div class="bg-light" color = "white">
-                        <h6 align="center">Hosting</h6>
+                    <div class="alert bg-dark text-primary">
+                        <h6 class="text-warning" align="center">Hosting</h6>
                         {% if events_hosting %}
                             {% for e in events_hosting %}
                                 <strong> {{e.location}} :</strong> {{e.name}}</br>
                             {% endfor %}
                         {% else %}
-                            <strong> No events hosting</strong>
+                            <strong class="text-white"> No events hosting</strong>
                         {% endif %}
-                        <h6 align="center">Attending</h6>
+                        <h6 class="text-warning" align="center">Attending</h6>
                         {% if events_attending %}
                             {% for e in events_attending %}
                                 <strong> {{e.location}} :</strong> {{e.name}}</br>
                             {% endfor %}
                         {% else %}
-                            <strong> No events attending</strong>
+                            <strong class="text-white"> No events attending</strong>
                         {% endif %}
-                        <h6 align="center">Attended</h6>
+                        <h6 class="text-warning" align="center">Attended</h6>
                         {% if events_attended %}
                             {% for e in events_attended %}
                                 <strong> {{e.location}} :</strong> {{e.name}}</br>
                             {% endfor %}
                         {% else %}
-                            <strong> No events attended</strong>
+                            <strong class="text-white"> No events attended</strong>
                         {% endif %}
-                    </div>  
-                    <form>
-                        <div class="input-group">
-                                <span class="input-group-addon"><i class="now-ui-icons business_bank"></i></span>
-                                <input id="password" type="password" class="form-control" name="password" placeholder="New Event">
+                        </br>
+                        </br>
+                        </br>
+                        </br>
+                        <div class="create_event">
+                            <input type="button" class="btn btn-success" value="Create Event" onclick="location.href = {% url 'event_create' %};">
                         </div>
-                    </form>
-                    <button type="button" class="btn btn-primary ">Add Event</button>
+                    </div> 
                 </div>
                 <div class="col-md-3">
                     <h3 class="text-center"> Songs </h3>
                     <div class="alert bg-dark">
-                        <strong>CURRENT SONG : </strong> &nbsp &nbsp {{logged_in_user.current_song.name}} </br>
-                        <strong>FAVORITE SONGS : </strong></br> &nbsp 
-                        {% for song in favorite_songs %}
-                            {{song.name}}, 
-                        {% endfor %}
+                        <strong>CURRENT SONG : </strong> &nbsp &nbsp 
+                        {% if logged_in_user.current_song %}
+                            {{logged_in_user.current_song.name}} 
+                        {% else %} 
+                            No song availble 
+                        {% endif %}
+                        </br>
+                        </br>
+                        </br>
+                        <div class="cur_song text-warning">
+                            <form method="post">
+                              {% csrf_token %}
+                              {{ profile_current_song.as_p }}
+                              <button type="submit" class="btn btn-success">Update Song</button>
+                            </form>
+                        </div>
+                        </br>
+                        
+                        <strong>FAVORITE SONGS : </strong> &nbsp 
+                        {% if favorite_songs %}
+                            {% for song in favorite_songs %}
+                                {{song.name}}, 
+                            {% endfor %}
+                        {% else %}
+                            No favorite song availble
+                        {% endif %}
+                        </br>
+                        </br>
+                        </br>
+                        <div class="fav_song text-warning">
+                            <form method="post">
+                              {% csrf_token %}
+                              {{ profile_favorite_songs.as_p }}
+                              <button type="submit" class="btn btn-success">Update Songs</button>
+                            </form>
+                        </div>
+                        </br>
+                        
+                        <strong>FAVORITE GENRES : &nbsp</strong> 
+                        {% if favorite_genres %}
+                            {% for i in favorite_genres %}
+                                {{i.name}},
+                            {% endfor %}
+                        {% else %}
+                            No Genres Available
+                        {% endif %}
+                        </br>
+                        </br>
+                        </br>
+                        <div class="fav_genre text-warning">
+                            <form method="post">
+                              {% csrf_token %}
+                              {{ profile_favorite_genres.as_p }}
+                              <button type="submit" class="btn btn-success">Update Genres</button>
+                            </form>
+                        </div> 
                         </br>
                     </div> 
-                    <form>
-                        <div class="input-group">
-                                <span class="input-group-addon"><i class="now-ui-icons media-2_note-03"></i></span>
-                                <input id="password" type="password" class="form-control" name="password" placeholder="New Info">
-                        </div>
-                    </form>
-                    <button type="button" class="btn btn-primary ">Add Song</button>
                 </div>
             </div>
         </div>
@@ -177,4 +210,5 @@ div.scrollmenu a:hover {
             
         </footer> 
     </div>
+</body>
 {% endblock %}

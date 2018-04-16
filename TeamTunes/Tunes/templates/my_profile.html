@@ -20,7 +20,7 @@ div.scrollmenu a:hover {
 }
 
 .bottom {
-    margin-top: 100px;
+    margin-top: 80px;
 
 }
 
@@ -46,13 +46,14 @@ div.scrollmenu a:hover {
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
-                    <img src="{{logged_in_user.profile_picture.url}}" class="rounded-circle img-thumbnail" alt="Tim Richards" width="284" height="226">
+                    <img src=" {{logged_in_user.profile_picture.url}} "  
+                    class="rounded-circle" alt="Tim Richards" width="284" height="226">
                 </div>
                 <div class="col-md-2">
                     <h2></h2>
-                    <h3><i class="now-ui-icons users_single-02"></i> {{logged_in_user.name}}</h3>
-                    <a><strong> Anthem: </strong> &nbsp &nbsp {{logged_in_user.anthem}}</a></br>
-                    <a><strong> From: </strong> &nbsp &nbsp {{logged_in_user.location}}</a></br>
+                    <h4><i class="now-ui-icons"></i> <strong> {% if logged_in_user.name %}{{logged_in_user.name}} {% else %} No Profile Name {% endif %} </strong> </h4>
+                    <a><strong> Anthem: </strong> &nbsp &nbsp {% if logged_in_user.anthem %}{{logged_in_user.anthem}} {% else %} No Anthem {% endif %}</a></br>
+                    <a><strong> From: </strong> &nbsp &nbsp {% if logged_in_user.location %}{{logged_in_user.location}} {% else %} No Location Available {% endif %}</a></br>
                     <a> <strong> Followers:</strong>  &nbsp &nbsp {{num_of_followers}}</a></br>
                     <a> <strong> Following:</strong>  &nbsp &nbsp {{num_of_following}}</a></br>
                 </div>
@@ -64,7 +65,7 @@ div.scrollmenu a:hover {
                                 <img src="{{picture.art.url}}" alt="Blond" width =23%>
                             {% endfor %}
                         {% else %}
-                            <p>No picture to rotate</p>
+                        <p><font color="white">No picture to rotate</font></p>
                         {% endif %}
                     </div>
                 </div>
@@ -72,32 +73,24 @@ div.scrollmenu a:hover {
         </div>
         <div class="container-fluid bottom">
             <div class = "row">
-                <div class="col-md-3">
-                    <h3 class="text-center"> Account Info</h3>
+                <div class="col-md-4">
+                    <h3 class="text-center"> Profile Info</h3>
                     <div class="alert bg-dark text-white">
-                        <strong>Followers: </strong> {{num_of_followers}}</br>
-                        <strong>Following:</strong> {{num_of_following}}</br>
-                        <strong>Primary Location:</strong> {{logged_in_user.location}}</br>
+                        <strong class="text-warning">Name: </strong> {% if logged_in_user.name %} {{ logged_in_user.name }} {% else %} No Profile Name {% endif %} </br>
+                        <strong class="text-warning">Followers: </strong> {% if num_of_followers%} {{num_of_followers}} {% else %} No Followers {% endif %}</br>
+                        <strong class="text-warning">Following:</strong> {% if num_of_following %} {{num_of_following}} {% else %} Not Following Anyone {% endif %}</br>
+                        <strong class="text-warning">Anthem: </strong> {% if logged_in_user.anthem %} {{ logged_in_user.anthem }} {% else %} No Anthem to show {% endif %} </br>
+                        <strong class="text-warning">Primary Location:</strong>  {% if logged_in_user.location %} {{logged_in_user.location}} {% else %} No Primary Location Available {% endif %} </br>
+                        <strong class="text-warning">Current Location: </strong> &nbsp &nbsp {% if logged_in_user.location %} {{logged_in_user.location}} {% else %} No Current Location Available {% endif %} </br>
+                        <strong class="text-warning">HOBBIES: </strong> &nbsp &nbsp {% if logged_in_user.hobbies  %}{{logged_in_user.hobbies}} {% else %} No Hobbies Available {% endif %}</br>
+                        <strong class="text-warning">Email :</strong> &nbsp &nbsp {% if logged_in_user.email %}{{logged_in_user.email}} {% else %} No Email Availabe {% endif %}</br>
+                        <strong class="text-warning">BIO : </strong> </br>{% if logged_in_user.bio %} {{logged_in_user.bio}} {% else %} NO Bio Available {% endif %}</br>
                     </div> 
                 </div>
-                <div class="col-md-3 personal-info">
-                    <h3 class="text-center"> Personal Info</h3>
-                    <div class="alert bg-dark">
-                        <strong>LOCATION: </strong> &nbsp &nbsp {{logged_in_user.location}} </br>
-                        <strong>HOBBIES: </strong> &nbsp &nbsp {{logged_in_user.hobbies}}</br>
-                        <strong>GENRES : &nbsp</strong> 
-                        {% for i in favorite_genres %}
-                            {{i.name}},
-                        {% endfor %}
-                        </br>
-                        <strong>Email :</strong> &nbsp &nbsp {{logged_in_user.email}}</br>
-                        <strong>BIO : </strong> </br>{{logged_in_user.bio}} </br>
-                    </div> 
-                </div>
-                <div class="col-md-3 events">
+                <div class="col-md-4 events">
                     <h3 class="text-center"> Events </h3>
-                    <div class="alert bg-dark text-primary">
-                        <h6 align="center">Hosting</h6>
+                    <div class="alert bg-dark text-white">
+                        <h6 class="text-warning" align="center">Hosting</h6>
                         {% if events_hosting %}
                             {% for e in events_hosting %}
                                 <strong> {{e.location}} :</strong> {{e.name}}</br>
@@ -105,7 +98,7 @@ div.scrollmenu a:hover {
                         {% else %}
                             <strong> No events hosting</strong>
                         {% endif %}
-                        <h6 align="center">Attending</h6>
+                        <h6 class="text-warning" align="center">Attending</h6>
                         {% if events_attending %}
                             {% for e in events_attending %}
                                 <strong> {{e.location}} :</strong> {{e.name}}</br>
@@ -113,7 +106,7 @@ div.scrollmenu a:hover {
                         {% else %}
                             <strong> No events attending</strong>
                         {% endif %}
-                        <h6 align="center">Attended</h6>
+                        <h6 class="text-warning"  align="center">Attended</h6>
                         {% if events_attended %}
                             {% for e in events_attended %}
                                 <strong> {{e.location}} :</strong> {{e.name}}</br>
@@ -123,14 +116,27 @@ div.scrollmenu a:hover {
                         {% endif %}
                     </div> 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <h3 class="text-center"> Songs </h3>
                     <div class="alert bg-dark">
-                        <strong>CURRENT SONG : </strong> &nbsp &nbsp {{logged_in_user.current_song.name}} </br>
-                        <strong>FAVORITE SONGS : </strong></br> &nbsp 
-                        {% for song in favorite_songs %}
-                            {{song.name}}, 
-                        {% endfor %}
+                        <strong class="text-warning" >CURRENT SONG : </strong> &nbsp &nbsp {% if logged_in_user.current_song %}{{logged_in_user.current_song.name}} {% else %} No song availble {% endif %}</br>
+                        <strong class="text-warning" >FAVORITE SONGS : </strong> &nbsp 
+                        {% if favorite_songs %}
+                            {% for song in favorite_songs %}
+                                {{song.name}}, 
+                            {% endfor %}
+                        {% else %}
+                            No favorite song availble
+                        {% endif %}
+                        </br>
+                        <strong class="text-warning" >FAVORITE GENRES : &nbsp</strong> 
+                        {% if favorite_genres %}
+                            {% for i in favorite_genres %}
+                                {{i.name}},
+                            {% endfor %}
+                        {% else %}
+                            No Genres Available
+                        {% endif %}
                         </br>
                     </div> 
                 </div>
@@ -139,7 +145,6 @@ div.scrollmenu a:hover {
         <footer class="footer">
             
         </footer> 
-    -->
     </div>
 </body>
 {% endblock %}

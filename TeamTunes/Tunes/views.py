@@ -73,8 +73,10 @@ def maps(request):
     follow = curr_user.profile.followers.all()
 
     for user in userhold:
-        if num > num_users-1:
+        if num >= 6 or num > num_users-1:
             break
+        if user.username == 'compsci326':
+            continue
         users.append(user)
         num = num + 1
 
@@ -224,6 +226,8 @@ def people(request):
     for user in userhold:
         if num > num_users-1:
             break
+        if user.username == 'compsci326':
+            continue
         users.append(user)
         num = num + 1
 

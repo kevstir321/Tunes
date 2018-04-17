@@ -50,9 +50,12 @@
             <h3 align="left"><i class="now-ui-icons users_single-02"></i> "{{ profile.name }}"</h3>
             <h6 align="left">Anthem: {{ profile.anthem }}</h6>
             <h6 align="left">Tuning in from: {{ profile.location }}<h6/>
-            <p align="left"><button class="btn btn-primary">Tune in</button></p>
             {% if request.user.is_authenticated  %}
-                
+                <form method="post">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <button align='left' type="submit" class="btn btn-primary">Tune in</button>
+                </form>
             {% else %}
                 <p><a href="{% url 'login' %}?next={{request.path}}" class="nav-link">Login</a> To tune in</p>
             {% endif %}

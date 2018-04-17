@@ -52,10 +52,31 @@ def index(request):
 
 from django.views import generic
 
-class EventDetailView(generic.DetailView):
-    model = Event
+from .forms import Add_Friend_Form, Add_Event_Form
 
-from .forms import Add_Friend_Form
+class EventDetailView(FormMixin,generic.DetailView):
+    model = Event
+    form_class = Add_Event_Form
+
+    def get_context_data(self, **kwargs):
+        context = super(EventDetailView, self).get_context_data(**kwargs)
+        context['form'] = Add_Event_Form(initial={'post': self.object})
+        return context
+
+    def post(self, request, *args, **kwargs):
+        logged_in_user = request.user.profile
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            logged_in_user.events_attending.add(Event.objects.get(id=self.kwargs['pk']))
+            logged_in_user.save()
+            other = Event.objects.get(id=self.kwargs['pk'])
+            other.people.add(logged_in_user)
+            other.save()
+            return redirect(request.path_info)
+        else:
+            return self.form_invalid(form)
+
 
 class UserDetailView(FormMixin,generic.DetailView):
     model = Profile

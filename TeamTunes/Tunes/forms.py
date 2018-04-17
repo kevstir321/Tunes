@@ -44,3 +44,6 @@ class ProfileForm(forms.ModelForm):
 
 class Add_Friend_Form(forms.Form):
     pass
+
+class Add_Event_Form(forms.Form):
+    pass

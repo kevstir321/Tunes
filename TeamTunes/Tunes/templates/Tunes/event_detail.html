@@ -10,29 +10,34 @@
 {% block title %}<title>{{ event.name }}</title>{% endblock %}
     <!-- Additional CSS Files -->
     <link rel='stylesheet' type='text/css' href="{% static 'css/eventstyle.css' %}" />
-    
+
 </head>
- 
+
 
 <body>
     <div class="text-center" id="allthings">
 		<div class="row justify-content-left">
-			
-            
+
+
             <div class="col-md-3" id="leftcol">
                 <div id="imagespace">
                     <a href="{{ event.web_link }}" id="eventlink">
                         <img src="{{ event.image.url }}" alt="{{ event.name }}" class="rounded" id="eventpic">
 
                     </a>
-                    <div class="checkbox" id=checksection>
-                        <input id="checkbox1" type="checkbox">
-                        <label for="checkbox1" id=checkboxtext>
-                            I'm Going to This Event!
-                        </label>
-                    </div>
+                    <div id="attending">
+                    {% if request.user.is_authenticated  %}
+                        <form method="post">
+                          {% csrf_token %}
+                          {{ form.as_p }}
+                          <button align='left' type="submit" class="btn btn-primary">I'm Attending!</button>
+                        </form>
+                    {% else %}
+                        <p><a href="{% url 'login' %}?next={{request.path}}" class="nav-link">Login</a> to attend!</p>
+                    {% endif %}
+                  </div>
                 </div>
-                
+
                 <h3><a class="main-col-head" href="#">People Going</a></h3>
 					<div class="list-group">
                         {% if event.people %}
@@ -52,7 +57,7 @@
                         <p>No Users :(</p>
                         {% endif %}
                     </div>
-                    
+
                     <div style="float: left; padding-top: 20%">
                         {% if perms.Tunes.add_event %}
                             <div>
@@ -75,7 +80,7 @@
                                 </a>
                             </div>
                         {% endif %}
-                    
+
                     </div>
             </div>
             <div class="col-md-6" id=maininfo>
@@ -86,13 +91,13 @@
                 <div class="typography-line" id=eventdesc>
                     <blockquote>
                         <p class="blockquote blockquote-primary">
-                            {{ event.description }}   
+                            {{ event.description }}
                         </p>
                     </blockquote>
                 </div>
                 <h1 class="list-group-item-heading text-primary text-center"><a href="{{ event.web_link }}" id="eventlink">Official Event Page &ensp; &ensp;</a></h1>
             </div>
-            
+
             <div class="col-md-3" id="eventbar">
 				<h3><a class="main-col-head" href="#">Other Events</a></h3>
 					<div class="list-group">
@@ -114,14 +119,14 @@
                         {% endif %}
                     </div>
             </div>
-            
+
         </div>
     </div>
-    
-    
-    
+
+
+
     <style>
-        
+
         .dropdown-menu a{
             color: black !important;
         }
@@ -172,7 +177,7 @@
 
         #eventbar{
             padding-top: 297px;
-            padding-left: 0%; 
+            padding-left: 0%;
             padding-right: 3%;
             padding-bottom: 5%;
             vertical-align: top
@@ -185,13 +190,18 @@
             height: auto;
             max-height: 80%;
         }
-        
+
         #rightspace{
             padding-top: 20%;
         }
 
         #maininfo{
 
+        }
+
+        #attending{
+            position: relative;
+            right: 30px;
         }
 
         #eventname{
@@ -238,7 +248,7 @@
         #allthings{
             padding-top: 5%;
         }
-        
+
         #imagespace{
             min-height: 300px;
             height: 20%;
@@ -247,8 +257,8 @@
     </style>
 
 </body>
-    
-    
+
+
 
 
 

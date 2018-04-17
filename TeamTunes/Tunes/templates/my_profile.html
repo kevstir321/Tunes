@@ -46,7 +46,7 @@ div.scrollmenu a:hover {
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
-                    <img src=" {{logged_in_user.profile_picture.url}} "  
+                    <img src=" {% if logged_in_user.profile_picture %}{{logged_in_user.profile_picture.url}} {% else %} ../media/images/default.jpg {% endif %}"  
                     class="rounded-circle" alt="Tim Richards" width="284" height="226">
                 </div>
                 <div class="col-md-2">

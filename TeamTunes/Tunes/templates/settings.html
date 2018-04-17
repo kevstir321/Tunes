@@ -46,15 +46,15 @@ div.scrollmenu a:hover {
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
-                    <img src=" {{logged_in_user.profile_picture.url}} "
+                    <img src=" {% if logged_in_user.profile_picture %} {{logged_in_user.profile_picture.url}} {% else %} ../media/images/default.jpg {% endif %}"
                     class="rounded-circle" alt="Tim Richards" width="284" height="226">
-                    <div class="pic_change bg-dark text-warning">
+                    <!-- <div class="pic_change bg-dark text-warning">
                         <form method="post">
                             {% csrf_token %}
                             {{ profile_picture_form.as_p }}
                           <button type="submit" class="btn btn-success">Save Picture</button>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-md-2">
                     <h2></h2>
@@ -89,12 +89,22 @@ div.scrollmenu a:hover {
             <div class = "row">
                 <div class="col-md-3">
                     <h3 class="text-center"> Account Info </h3>
-                    <div class="alert bg-dark text-warning">
+                    <div class ="bg-dark text-white">
+                    <!-- <div class="alert bg-dark text-warning">
                         <form method="post">
                           {% csrf_token %}
                           {{ user_form.as_p }}
                           <button type="submit" class="btn btn-success">Save Changes</button>
                         </form>
+                    </div> -->
+                        <strong class ="text-warning">User name : </strong> &nbsp &nbsp
+                        {{request.user.get_username}}</br>
+                        <strong class ="text-warning">First name : </strong> &nbsp &nbsp
+                        {{request.user.first_name}}</br>
+                        <strong class ="text-warning">Last name : </strong> &nbsp &nbsp
+                        {{request.user.last_name}}</br>
+                        <strong class ="text-warning">Email : </strong> &nbsp &nbsp
+                        {{request.user.email}}</br>
                     </div>
                 </div>
                 <div class="col-md-3">

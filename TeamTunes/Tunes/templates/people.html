@@ -20,23 +20,32 @@
 .thumbnail {
     padding-top: 25px;
     }
+    
+#followbtn {
+    color: white;
+}
 </style>
 
 
+
+ 
 <div class="container">
 	<div id=searchbar>
     <div class="col-md-9">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Search for People">
             <span class="input-group-addon">
-                <i class="now-ui-icons users_single-02"></i>
+                <a href="{{ u.profile.get_absolute_url }}">Search</a>
+                <i class="now-ui-icons users_single-02">
+                </i>
             </span>
+
         </div>
     </div>
     </div>
 
 {% if user %}
-    {% for u in user %}
+{% for u in user %}
     <div class="row">
         <div class="col-md-2">
             <div class="thumbnail">
@@ -48,7 +57,11 @@
             <h6>Listening to: {{ u.profile.current_song }}</h6>
             <h6>Anthem: {{ u.profile.anthem }}</h6>
             <h6>Tuning in from: {{ u.profile.location }}</h6>
-            <button class="btn btn-primary btn-round">Unfollow</button>
+            <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-round">            
+                <a id = followbtn href="{{ u.profile.get_absolute_url }}">Follow</a></button>
+            </form>
         </div>
         <div class="col-md-3">
             <iframe src="https://open.spotify.com/embed/track/5cXg9IQS34FzLVdHhp7hu7" width="300" height="100" frameborder="0" allowtransparency="true"></iframe>

@@ -20,3 +20,6 @@ Once you find your friends, Tunes will help you connect outside of the site by a
 
 ### Check Your Map! 
 Tunes will unite all of these features into an interactive map display, which will dynamically render users and events near you based on your location and settings specified. Users will be able to browse the map at any time to find others also listening to music at the same time, and locate events going on near them to attend.  
+
+## Dependencies
+Please install the packages Pillow using the command `pip install Pillow` and django-leaflet using the command `pip install django-leaflet` before running our project. 

@@ -48,13 +48,6 @@ div.scrollmenu a:hover {
                 <div class="col-md-2">
                     <img src=" {% if logged_in_user.profile_picture %} {{logged_in_user.profile_picture.url}} {% else %} ../media/images/default.jpg {% endif %}"
                     class="rounded-circle" alt="Tim Richards" width="284" height="226">
-                    <!-- <div class="pic_change bg-dark text-warning">
-                        <form method="post">
-                            {% csrf_token %}
-                            {{ profile_picture_form.as_p }}
-                          <button type="submit" class="btn btn-success">Save Picture</button>
-                        </form>
-                    </div> -->
                 </div>
                 <div class="col-md-2">
                     <h2></h2>
@@ -110,7 +103,7 @@ div.scrollmenu a:hover {
                 <div class="col-md-3">
                     <h3 class="text-center"> Profile Info</h3>
                     <div class="alert bg-dark text-warning">
-                        <form method="post">
+                        <form method="post" enctype="multipart/form-data">
                           {% csrf_token %}
                           {{ profile_form.as_p }}
                           <button type="submit" class="btn btn-success">Save Changes</button>
@@ -151,7 +144,7 @@ div.scrollmenu a:hover {
                         <div class="create_event">
                             <form action="{% url 'event_create' %}">
                                 <input type="submit" class="btn btn-success" value="Create Event" />
-                            </form> 
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -255,20 +255,13 @@ def update_profile(request):
 
     if request.method == 'POST':
         user_form = UserForm(request.POST)
-        profile_form = ProfileForm(request.POST)
+        profile_form = ProfileForm(request.POST,request.FILES)
         profile_picture_form = Profile_Picture_Form(request.POST)
         profile_rotation = RotationForm(request.POST)
         profile_favorite_songs = Favorite_Songs_Form(request.POST)
         profile_favorite_genres = Favorite_Genres_Form(request.POST)
         profile_current_song = Current_Song_Form(request.POST)
         i = 0
-        if profile_picture_form.is_valid():
-            profile_picture_form = Profile_Picture_Form(request.POST, instance=request.user.profile)
-            profile_picture_form.save()
-            i = 1
-            #return redirect('settings')
-        else:
-            pass
 
         if user_form.is_valid():
             user = user_form.save()
@@ -281,7 +274,7 @@ def update_profile(request):
             pass
 
         if profile_form.is_valid():
-            profile_form = ProfileForm(request.POST, instance=request.user.profile)
+            profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
             profile_form.full_clean()
             profile_form.save()
             i = 1
@@ -327,7 +320,6 @@ def update_profile(request):
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
-        profile_picture_form = Profile_Picture_Form(instance=request.user.profile)
         profile_favorite_songs = Favorite_Songs_Form(instance=request.user.profile)
         profile_favorite_genres = Favorite_Genres_Form(instance=request.user.profile)
         profile_current_song = Current_Song_Form(instance=request.user.profile)
@@ -336,7 +328,6 @@ def update_profile(request):
     return render(request, 'settings.html', {
         'user_form': user_form,
         'profile_form': profile_form,
-        'profile_picture_form': profile_picture_form,
         'num_of_followers': num_of_followers,
         'num_of_following': num_of_following,
         'logged_in_user': logged_in_user,
@@ -410,13 +401,13 @@ from django.db import transaction
 def create_profile(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST)
-        profile_form = ProfileForm(request.POST)
+        profile_form = ProfileForm(request.POST, request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.refresh_from_db()
             user.set_password(user_form.cleaned_data.get('password'))
             user.save()
-            profile_form = ProfileForm(request.POST, instance=user.profile)
+            profile_form = ProfileForm(request.POST, request.FILES, instance=user.profile)
             profile_form.full_clean()
             profile_form.save()
             return redirect('login')

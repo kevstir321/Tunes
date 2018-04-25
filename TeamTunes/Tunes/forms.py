@@ -40,7 +40,7 @@ class Profile_Picture_Form(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('name','bio','anthem','location','email', 'hobbies','playlists','latitude','longitude')
+        fields = ('name','bio','anthem','location','email', 'hobbies','playlists','profile_picture','latitude','longitude')
 
 class Add_Friend_Form(forms.Form):
     pass
